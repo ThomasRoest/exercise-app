@@ -1,5 +1,6 @@
 import prisma from "@/prisma/db";
 import { getCurrentUser } from "./users";
+import { Prisma } from "@prisma/client";
 
 const PAGE_SIZE = 10;
 interface SetsFilter {
@@ -62,6 +63,31 @@ export const getTotalSetsCount = async (filter: SetsFilter) => {
           },
         },
       ],
+    },
+  });
+};
+
+
+export const getSets = async (where?: Prisma.SetWhereInput) => {
+  const user = await getCurrentUser();
+  if (!user) {
+    return null;
+  }
+
+  return await prisma.set.findMany({
+    where: {
+      userId: user.id,
+      ...where
+    },
+    orderBy: {
+      weight: "desc"
+    },
+    select: {
+      id: true,
+      exerciseTitle: true,
+      reps: true,
+      weight: true,
+      createdAt: true,
     },
   });
 };

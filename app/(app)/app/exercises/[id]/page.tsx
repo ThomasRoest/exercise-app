@@ -6,6 +6,7 @@ import { formatDate } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import { z } from "zod";
 import { DeleteExercise } from "../components/DeleteExercise";
+import { WrappedLink } from "./progress/WrappedLink";
 
 const PAGE_SIZE = 10;
 
@@ -22,7 +23,7 @@ const Page = async (props: {
   searchParams: Promise<unknown>;
 }) => {
   const params = await props.params;
-  const searchParams = await props.searchParams
+  const searchParams = await props.searchParams;
 
   const validatedParams = paramsSchema.safeParse(params);
   const validatedSearchParams = searchParamsSchema.safeParse(searchParams);
@@ -33,10 +34,7 @@ const Page = async (props: {
     return notFound();
   }
 
-  const exercise = await getExerciseById(
-    validatedParams.data.id,
-    currentPage
-  );
+  const exercise = await getExerciseById(validatedParams.data.id, currentPage);
 
   if (!exercise) {
     return notFound();
@@ -47,15 +45,11 @@ const Page = async (props: {
   return (
     <PageContainer>
       <PageHeader className="justify-between gap-1">
-        <div className="basis-[40px]" />
-        <div className="text-center">
-          <h1 className="font-bold tracking-wider text-blue-800">
-            {exercise.title} ({exercise._count.sets})
-          </h1>
-        </div>
-        <div className="text-right basis-[40px]">
-          <DeleteExercise exercise={exercise} />
-        </div>
+        <WrappedLink />
+        <h1 className="font-bold tracking-wider text-blue-800">
+          {exercise.title} ({exercise._count.sets})
+        </h1>
+        <DeleteExercise exercise={exercise} />
       </PageHeader>
       <ul className="flex flex-col gap-2">
         {exercise.sets.length > 0 ? (
