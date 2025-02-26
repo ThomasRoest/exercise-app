@@ -57,6 +57,7 @@ model User {
   programs      Program[]
   sets          Set[]
   exercises     Exercise[]
+  habits        Habit[]
 
   @@map("users")
 }
@@ -122,6 +123,17 @@ model Exercise {
   sets      Set[]
 
   @@map("exercises")
+}
+
+model Habit {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String
+  createdAt DateTime @default(now())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("habits")
 }
 
 model VerificationToken {

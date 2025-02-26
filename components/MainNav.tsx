@@ -1,17 +1,12 @@
 "use client";
 
+import { navLinks } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 import { SidebarOpen, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ReactElement, ReactNode, useState } from "react";
 import { Drawer } from "./Drawer";
-import { IconExercise } from "./icons/IconExercise";
-import { IconHome } from "./icons/IconHome";
-import { IconMeals } from "./icons/IconMeals";
-import { IconNotes } from "./icons/IconNotes";
-import { IconSets } from "./icons/IconSets";
-import { IconWorkout } from "./icons/IconWorkout";
 import { Button } from "./ui/button";
 
 const NavLink = ({
@@ -45,14 +40,7 @@ const NavLink = ({
   );
 };
 
-const links = [
-  { href: "/", label: "Home", icon: <IconHome /> },
-  { href: "/app/meals", label: "Meals", icon: <IconMeals /> },
-  { href: "/app/workouts", label: "Workouts", icon: <IconWorkout /> },
-  { href: "/app/notes", label: "Notes", icon: <IconNotes /> },
-  { href: "/app/sets", label: "All sets", icon: <IconSets /> },
-  { href: "/app/exercises", label: "Exercises", icon: <IconExercise /> },
-];
+
 
 export const MainNav = (): ReactElement<any> => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
@@ -96,7 +84,7 @@ export const MainNav = (): ReactElement<any> => {
       <Drawer close={close} isOpen={drawerIsOpen}>
         <nav>
           <ul>
-            {links.map((link) => {
+            {navLinks.map((link) => {
               return (
                 <NavLink
                   key={link.href}

@@ -1,10 +1,6 @@
-import { IconExercise } from "@/components/icons/IconExercise";
-import { IconMeals } from "@/components/icons/IconMeals";
-import { IconNotes } from "@/components/icons/IconNotes";
-import { IconSets } from "@/components/icons/IconSets";
-import { IconWorkout } from "@/components/icons/IconWorkout";
+import { navLinks } from "@/lib/nav";
 import Link from "next/link";
-import { ReactNode, PropsWithChildren } from "react";
+import { PropsWithChildren, ReactNode } from "react";
 
 const LinkComponent = ({
   href,
@@ -29,27 +25,21 @@ const Card = (props: PropsWithChildren) => {
   );
 };
 
-const cards = [
-  { href: "/app/workouts", label: "Workouts", icon: <IconWorkout /> },
-  { href: "/app/notes", label: "Notes", icon: <IconNotes /> },
-  { href: "/app/sets", label: "Sets", icon: <IconSets /> },
-  { href: "/app/meals", label: "Meals", icon: <IconMeals /> },
-  { href: "/app/exercises", label: "Exercises", icon: <IconExercise /> },
-];
-
 const AppPage = async () => {
   return (
     <div className="flex mx-auto flex-col md:flex-row gap-2 flex-wrap max-w-[1000px] ">
-      {cards.map((card) => {
-        return (
-          <Card key={card.href}>
-            <LinkComponent href={card.href}>
-              {card.icon}
-              {card.label}
-            </LinkComponent>
-          </Card>
-        );
-      })}
+      {navLinks
+        .filter((link) => link.href !== "/")
+        .map((link) => {
+          return (
+            <Card key={link.href}>
+              <LinkComponent href={link.href}>
+                {link.icon}
+                {link.label}
+              </LinkComponent>
+            </Card>
+          );
+        })}
     </div>
   );
 };
