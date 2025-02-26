@@ -27,7 +27,7 @@ export const ExerciseForm = ({ onSuccess }: { onSuccess?: () => void }) => {
         <FormHeader>Add exercise</FormHeader>
         <div className="flex flex-col gap-2">
           <Label htmlFor="title">title</Label>
-          <Input id="title" name="title" placeholder="Add title..." autoFocus />
+          <Input id="title" name="title" placeholder="Add title..." />
         </div>
         <SubmitButton>Create</SubmitButton>
       </Form>
