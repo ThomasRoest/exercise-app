@@ -6,6 +6,7 @@ import { capitalize } from "@/lib/utils";
 import { HabitForm } from "./components/HabitForm";
 import { getUserHabits } from "@/data/habits";
 import { DeleteHabit } from "./components/DeleteHabit";
+import { HabitCard } from "./components/HabitCard";
 
 const getMonthLabel = () => {
   const formatter = new Intl.DateTimeFormat("nl", {
@@ -29,6 +30,7 @@ const HabitsPage = async () => {
           {capitalize(getMonthLabel())}
         </h2>
       </PageHeader>
+      <HabitCard />
       {habits?.map((habit) => {
         return (
           <div key={habit.id} className="flex items-center">
