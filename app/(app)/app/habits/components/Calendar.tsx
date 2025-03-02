@@ -111,7 +111,6 @@ export const Calendar = () => {
             >
               <time dateTime={format(day, "yyyy-MM-dd")}>
                 {format(day, "d")}
-                {/* {format(day, "EEEE, MMMM do, yyyy")} */}
               </time>
             </button>
           );
