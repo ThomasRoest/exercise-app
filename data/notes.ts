@@ -18,6 +18,7 @@ export const getUserNotes = async () => {
       id: true,
       description: true,
       title: true,
+      createdAt: true
     },
   });
 };

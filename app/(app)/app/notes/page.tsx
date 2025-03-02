@@ -3,6 +3,7 @@ import { IconNotes } from "@/components/icons/IconNotes";
 import { PageContainer } from "@/components/PageContainer";
 import { PageHeader } from "@/components/PageHeader";
 import { getUserNotes } from "@/data/notes";
+import { NotebookText, NotepadText } from "lucide-react";
 import Link from "next/link";
 import { NewNoteForm } from "./new/NoteForm";
 
@@ -30,16 +31,23 @@ const NotesPage = async () => {
             return (
               <li
                 key={program.id}
-                className="flex justify-between items-center rounded-md bg-white shadow-sm"
+                className="rounded-md bg-white shadow-sm hover:shadow transition-all duration-200 border border-slate-100"
               >
                 <Link
                   href={`/app/notes/${program.id}`}
-                  className="w-full p-2 hover:bg-slate-100"
+                  className="p-3 w-full hover:bg-slate-50 flex items-center gap-x-2"
                 >
-                  {program.title}
-                  <pre className="text-sm overflow-hidden">
-                    {program.description}
-                  </pre>
+                  <NotepadText className="h-5 w-5 text-slate-400" />
+                  <div>
+                    <div className="text-sm text-slate-800">
+                      {program.title}
+                    </div>
+                    {program.createdAt && (
+                      <div className="text-xs text-slate-500">
+                        {new Date(program.createdAt).toLocaleDateString()}
+                      </div>
+                    )}
+                  </div>
                 </Link>
               </li>
             );

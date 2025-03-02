@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toastOptions } from "@/lib/utils";
 import { Program } from "@prisma/client";
 import { Loader2, Save, X } from "lucide-react";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 export const EditNoteForm = ({ note }: { note: Program }) => {
@@ -18,6 +18,7 @@ export const EditNoteForm = ({ note }: { note: Program }) => {
   );
   const [isEditing, setIsEditing] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
 
   const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsEditing(true);
@@ -55,6 +56,17 @@ export const EditNoteForm = ({ note }: { note: Program }) => {
     setIsPending(false);
   };
 
+  useEffect(() => {
+    if (!textAreaRef.current) {
+      return;
+    }
+    const textarea = textAreaRef.current
+    if (textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+  }, [])
+
   return (
     <form className="flex flex-col gap-y-4 p-4" onSubmit={handleSubmit}>
       <div>
@@ -74,9 +86,9 @@ export const EditNoteForm = ({ note }: { note: Program }) => {
           Description
         </Label>
         <Textarea
+          ref={textAreaRef}
           id="description"
           name="description"
-          className="min-h-[300px]"
           value={description ?? ""}
           onChange={handleDescriptionChange}
         />
