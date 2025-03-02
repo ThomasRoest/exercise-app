@@ -2,20 +2,10 @@ import { FloatingActionButton } from "@/components/FloatingActionButton";
 import { IconHabits } from "@/components/icons/IconHabits";
 import { PageContainer } from "@/components/PageContainer";
 import { PageHeader } from "@/components/PageHeader";
-import { capitalize } from "@/lib/utils";
-import { HabitForm } from "./components/HabitForm";
 import { getUserHabits } from "@/data/habits";
 import { DeleteHabit } from "./components/DeleteHabit";
 import { HabitCard } from "./components/HabitCard";
-
-const getMonthLabel = () => {
-  const formatter = new Intl.DateTimeFormat("nl", {
-    year: "numeric",
-    month: "long",
-  });
-  const date = new Date();
-  return formatter.format(date);
-};
+import { HabitForm } from "./components/HabitForm";
 
 const HabitsPage = async () => {
   const habits = await getUserHabits();
@@ -26,9 +16,6 @@ const HabitsPage = async () => {
           <IconHabits />
           <h1 className="font-bold">Habits</h1>
         </div>
-        <h2 className="font-bold text-gray-500">
-          {capitalize(getMonthLabel())}
-        </h2>
       </PageHeader>
       <HabitCard />
       {habits?.map((habit) => {

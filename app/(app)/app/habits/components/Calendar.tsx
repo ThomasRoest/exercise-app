@@ -3,19 +3,19 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
-  startOfToday,
-  eachDayOfInterval,
-  startOfWeek,
-  endOfWeek,
-  endOfMonth,
   add,
-  getDay,
-  isToday,
-  isSameMonth,
-  parse,
+  eachDayOfInterval,
+  endOfMonth,
+  endOfWeek,
   format,
+  getDay,
+  isSameMonth,
+  isToday,
+  parse,
+  startOfToday,
+  startOfWeek,
 } from "date-fns";
-import { Calendar1, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useState } from "react";
 
 const colStartClasses = [
@@ -72,21 +72,18 @@ export const Calendar = () => {
 
   return (
     <div>
-      <div className="flex justify-between">
-        <div className="flex items-center justify-center gap-x-2">
-          <Button size="icon" variant="secondary" onClick={reset}>
-            <Calendar1 />
-          </Button>
-          {format(firstDayCurrentMonth, "MMMM yyyy")}
-        </div>
-        <div className="flex gap-2">
-          <Button size="icon" onClick={previousMonth} variant="secondary">
-            <ChevronLeft />
-          </Button>
-          <Button size="icon" onClick={nextMonth} variant="secondary">
-            <ChevronRight />
+      <div className="flex justify-between mb-6">
+        <Button variant="outline" size="icon" onClick={previousMonth}>
+          <ChevronLeftIcon className="h-4 w-4" />
+        </Button>
+        <div className="font-bold flex items-center gap-x-2">
+          <Button variant="ghost" onClick={reset} className="font-bold">
+            {format(firstDayCurrentMonth, "MMMM yyyy")}
           </Button>
         </div>
+        <Button variant="outline" size="icon" onClick={nextMonth}>
+          <ChevronRightIcon className="h-4 w-4" />
+        </Button>
       </div>
       <div className="grid grid-cols-7 grid-rows-4 gap-4">
         {week.map((day, index) => {
@@ -102,15 +99,10 @@ export const Calendar = () => {
               key={day.toString()}
               onClick={() => toggleCompleted(day)}
               className={cn(
-                ` h-10 flex items-center justify-center border text-xs rounded-lg ${
-                  colStartClasses[getDay(day)]
-                }`,
+                ` w-8 h-8 rounded-full text-sm ${colStartClasses[getDay(day)]}`,
                 {
                   "border-2 border-blue-600": isToday(day),
-                  "bg-gray-200 font-bold": isSameMonth(
-                    day,
-                    firstDayCurrentMonth
-                  ),
+                  "bg-gray-200": isSameMonth(day, firstDayCurrentMonth),
                   "bg-green-500 text-white": completedDays.includes(
                     day.toDateString()
                   ),

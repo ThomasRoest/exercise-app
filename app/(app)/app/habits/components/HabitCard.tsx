@@ -1,21 +1,19 @@
 "use client";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar } from "./Calendar";
 
 export const HabitCard = () => {
   return (
-    <Card className="bg-white shadow">
-      <CardHeader>
+    <Card className="bg-white shadow rounded-lg max-w-[500px]">
+      <CardHeader className="rounded-t-lg border-b">
         <div className="flex items-center justify-between">
-          {/* <CardTitle className="text-xl font-bold">Walk</CardTitle> */}
-          {/* <div className="text-xl font-semibold">2025</div> */}
+          <CardTitle className="text-lg font-bold">Walk</CardTitle>
+          <div className="text-sm font-semibold text-gray-500">4/31</div>
         </div>
-        {/* <div className="mt-2 text-sm text-gray-600">Current Streak: 1 days</div> */}
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-4">
         <Calendar />
       </CardContent>
     </Card>
   );
 };
-
