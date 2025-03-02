@@ -29,3 +29,9 @@ export const toastOptions: ToastOptions = {
   duration: 3000,
   position: "top-center",
 };
+
+export const dateFormatter = new Intl.DateTimeFormat('nl-NL', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+});

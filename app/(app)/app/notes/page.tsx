@@ -3,9 +3,10 @@ import { IconNotes } from "@/components/icons/IconNotes";
 import { PageContainer } from "@/components/PageContainer";
 import { PageHeader } from "@/components/PageHeader";
 import { getUserNotes } from "@/data/notes";
-import { NotebookText, NotepadText } from "lucide-react";
+import { NotepadText } from "lucide-react";
 import Link from "next/link";
 import { NewNoteForm } from "./new/NoteForm";
+import { dateFormatter } from "@/lib/utils";
 
 const NotesPage = async () => {
   const notes = await getUserNotes();
@@ -44,7 +45,7 @@ const NotesPage = async () => {
                     </div>
                     {program.createdAt && (
                       <div className="text-xs text-slate-500">
-                        {new Date(program.createdAt).toLocaleDateString()}
+                        {dateFormatter.format(program.createdAt)}
                       </div>
                     )}
                   </div>
