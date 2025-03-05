@@ -3,10 +3,14 @@ import { IconNotes } from "@/components/icons/IconNotes";
 import { PageContainer } from "@/components/PageContainer";
 import { PageHeader } from "@/components/PageHeader";
 import { getUserNotes } from "@/data/notes";
-import { NotepadText } from "lucide-react";
 import Link from "next/link";
 import { NewNoteForm } from "./new/NoteForm";
 import { dateFormatter } from "@/lib/utils";
+
+const Preview = ({ description }: { description: string | null }) => {
+  if (!description) return null;
+  return <div className="text-xs">{description.slice(0, 300)}...</div>;
+};
 
 const NotesPage = async () => {
   const notes = await getUserNotes();
@@ -38,16 +42,16 @@ const NotesPage = async () => {
                   href={`/app/notes/${program.id}`}
                   className="p-3 w-full hover:bg-slate-50 flex items-center gap-x-2"
                 >
-                  <NotepadText className="h-5 w-5 text-slate-400" />
                   <div>
-                    <div className="text-sm text-slate-800">
+                    <div className="text-sm text-slate-800 font-semibold">
                       {program.title}
                     </div>
                     {program.createdAt && (
-                      <div className="text-xs text-slate-500">
+                      <div className="text-xs text-slate-500 mb-1">
                         {dateFormatter.format(program.createdAt)}
                       </div>
                     )}
+                    <Preview description={program.description} />
                   </div>
                 </Link>
               </li>
