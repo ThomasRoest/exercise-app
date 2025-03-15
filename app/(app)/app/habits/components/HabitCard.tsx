@@ -5,7 +5,7 @@ import { DeleteHabit } from "./DeleteHabit";
 
 export const HabitCard = ({ habit }: { habit: Habit }) => {
   return (
-    <Card className="bg-white shadow rounded-lg max-w-[500px]">
+    <Card className="bg-white shadow rounded-lg max-w-[500px] dark:bg-gray-800">
       <CardHeader className="rounded-t-lg border-b">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-x-2">

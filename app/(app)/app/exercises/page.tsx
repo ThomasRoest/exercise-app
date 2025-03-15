@@ -16,7 +16,7 @@ const Exercises = async () => {
     <PageContainer>
       <PageHeader>
         <IconExercise />
-        <h1 className="font-bold">Exercises</h1>
+        <h1 className="font-bold dark:text-gray-200">Exercises</h1>
       </PageHeader>
       <ul className="space-y-2">
         {exercises.length === 0 && (
@@ -27,7 +27,7 @@ const Exercises = async () => {
             <li key={exercise.id}>
               <Link
                 href={`/app/exercises/${exercise.id}`}
-                className="bg-white text-sm inline-block w-full h-full p-4 rounded-md shadow-sm active:bg-gray-100"
+                className="bg-white text-sm inline-block w-full h-full p-4 rounded-md shadow-sm active:bg-gray-100 dark:bg-gray-800 dark:text-gray-300"
               >
                 {exercise.title}
               </Link>

@@ -23,7 +23,7 @@ export const WorkoutSetsList = ({ entries }: { entries: Set[] }) => {
   return groups.map((group) => {
     return (
       <div key={group.id} className="">
-        <h3 className="mb-2 font-semibold">
+        <h3 className="mb-2 font-semibold dark:text-gray-200">
           {capitalize(group.id)}{" "}
           <span className="text-sm text-slate-500 tracking-widest font-normal">
             ({group.entries.length})

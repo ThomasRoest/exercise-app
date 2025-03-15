@@ -13,7 +13,7 @@ export const WorkoutItem = ({
     <li>
       <Link
         href={`/app/workouts/${workout.id}`}
-        className="w-full text-sm p-4 rounded shadow-sm active:bg-slate-200 bg-white flex items-center gap-x-2 justify-between"
+        className="w-full text-sm p-4 rounded shadow-sm active:bg-slate-200 bg-white flex items-center gap-x-2 justify-between dark:bg-gray-800 dark:text-gray-300"
       >
         <div>
         {formatDate(workout.createdAt)}

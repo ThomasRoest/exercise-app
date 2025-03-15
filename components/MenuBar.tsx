@@ -25,7 +25,7 @@ const links = [
 
 export const MenuBar = () => {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t dark:bg-gray-900">
       <div className="flex justify-between">
         {links.map((link) => {
           return (

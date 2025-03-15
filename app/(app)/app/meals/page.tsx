@@ -16,7 +16,7 @@ const Meals = async () => {
     <PageContainer>
       <PageHeader>
         <IconMeals />
-        <h1 className="font-bold flex gap-x-2 items-center">
+        <h1 className="font-bold flex gap-x-2 items-center dark:text-gray-200">
           Meals
           <span className="text-xs font-normal">{formatDate(new Date())}</span>
         </h1>

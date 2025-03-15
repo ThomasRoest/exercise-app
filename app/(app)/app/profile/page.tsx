@@ -1,5 +1,6 @@
 import { auth, signOut } from "@/auth";
 import { PageContainer } from "@/components/PageContainer";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { LogOut } from "lucide-react";
@@ -19,8 +20,8 @@ const ProfilePage = async () => {
 
   return (
     <PageContainer>
-      <Card className="p-6 mt-5">
-        <div className="flex gap-2 items-center mb-4">
+      <Card className="p-6 mt-5 flex flex-col gap-y-10 dark:bg-gray-800">
+        <div className="flex gap-2 items-center">
           {session.user?.image && (
             <Image
               src={session.user.image}
@@ -35,7 +36,8 @@ const ProfilePage = async () => {
             <p className="text-sm">{session.user?.email}</p>
           </div>
         </div>
-        <form action={handleSignOut}>
+        <ThemeSwitcher />
+        <form action={handleSignOut} className="flex justify-end">
           <Button>
             Signout
             <LogOut className="h-4 w-4 ml-3" />

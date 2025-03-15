@@ -12,7 +12,7 @@ const LinkComponent = ({
   return (
     <Link
       href={href}
-      className="border h-52 flex-1 flex items-center justify-center hover:bg-slate-100 active:bg-slate-200 rounded gap-2 font-bold"
+      className="h-52 flex-1 flex items-center justify-center rounded gap-2 font-bold dark:text-gray-200"
     >
       {children}
     </Link>
@@ -21,7 +21,9 @@ const LinkComponent = ({
 
 const Card = (props: PropsWithChildren) => {
   return (
-    <div className="bg-white flex-auto basis-1/5 rounded">{props.children}</div>
+    <div className="bg-white flex-auto basis-1/5 rounded dark:bg-gray-800">
+      {props.children}
+    </div>
   );
 };
 

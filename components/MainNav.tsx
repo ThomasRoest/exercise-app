@@ -61,19 +61,18 @@ export const MainNav = (): ReactElement<any> => {
 
   return (
     <>
-      <div className="text-sm px-2 py-2">
+      <div className="text-sm px-2 py-2 dark:bg-gray-900">
         <nav className="flex justify-between items-center">
           <Button variant="outline" size="icon" onClick={open}>
             <SidebarOpen className="h-4 w-4" />
           </Button>
-          <Link href="/" className="font-bold">
+          <Link href="/" className="font-bold dark:text-gray-200">
             Fit app
           </Link>
           <Button
             asChild
             size="icon"
             variant="ghost"
-            className="rounded-full bg-gray-100"
           >
             <Link href="/app/profile">
               <User className="h-5 w-5" />

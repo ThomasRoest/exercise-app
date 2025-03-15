@@ -51,7 +51,7 @@ const Workouts = async () => {
     <PageContainer>
       <PageHeader>
         <IconWorkout />
-        <h1 className="font-bold">Workouts</h1>
+        <h1 className="font-bold dark:text-gray-200">Workouts</h1>
       </PageHeader>
       <ul>
         {grouped.length === 0 ? (
@@ -60,7 +60,7 @@ const Workouts = async () => {
         {grouped.map((group) => {
           return (
             <li key={group.id} className="mb-4">
-              <h3 className="text-sm text-slate-400 mb-2 tracking-wider">
+              <h3 className="text-sm text-gray-300 mb-2 tracking-wider">
                 {formatGroupLabel(group)}
               </h3>
               <ul className="space-y-2">

@@ -40,7 +40,7 @@ export const Drawer = ({
     <>
       <div
         ref={ref}
-        className={cn("fixed bg-white shadow-lg z-20 transition", {
+        className={cn("fixed bg-white shadow-lg z-20 transition dark:bg-gray-900 dark:text-gray-300", {
           "top-0 left-0 bottom-0 w-[300px]": position === "left",
           "bottom-0 left-0 right-0": position === "bottom",
           "translate-x-[-300px] transition": !isOpen && position === "left",

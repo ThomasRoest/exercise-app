@@ -9,7 +9,7 @@ import { dateFormatter } from "@/lib/utils";
 
 const Preview = ({ description }: { description: string | null }) => {
   if (!description) return null;
-  return <div className="text-xs">{description.slice(0, 300)}...</div>;
+  return <div className="text-xs dark:text-gray-300">{description.slice(0, 300)}...</div>;
 };
 
 const NotesPage = async () => {
@@ -25,7 +25,7 @@ const NotesPage = async () => {
         <PageHeader className="justify-between">
           <div className="flex items-center gap-x-2">
             <IconNotes />
-            <h1 className="font-bold">Notes</h1>
+            <h1 className="font-bold dark:text-gray-300">Notes</h1>
           </div>
         </PageHeader>
         <ul className="space-y-2">
@@ -36,18 +36,18 @@ const NotesPage = async () => {
             return (
               <li
                 key={program.id}
-                className="rounded-md bg-white shadow-sm hover:shadow transition-all duration-200 border border-slate-100"
+                className="rounded-md bg-white shadow-sm transition-all duration-200 dark:bg-gray-800 dark:text-white"
               >
                 <Link
                   href={`/app/notes/${program.id}`}
-                  className="p-3 w-full hover:bg-slate-50 flex items-center gap-x-2"
+                  className="p-3 w-full flex items-center gap-x-2"
                 >
                   <div>
-                    <div className="text-sm text-slate-800 font-semibold">
+                    <div className="text-sm text-slate-800 font-semibold dark:text-gray-300">
                       {program.title}
                     </div>
                     {program.createdAt && (
-                      <div className="text-xs text-slate-500 mb-1">
+                      <div className="text-xs text-slate-500 mb-1 dark:text-gray-400">
                         {dateFormatter.format(program.createdAt)}
                       </div>
                     )}
