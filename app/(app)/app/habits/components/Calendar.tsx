@@ -100,8 +100,8 @@ export const Calendar = ({ completeDate, completedDays, removeDate }: CalendarPr
                 ` w-8 h-8 rounded-full text-sm ${colStartClasses[getDay(day)]}`,
                 {
                   "border-2 border-blue-600": isToday(day),
-                  "bg-gray-200": isSameMonth(day, firstDayCurrentMonth),
-                  "bg-green-500 text-white": isCompleted,
+                  "bg-gray-200 dark:bg-gray-700": isSameMonth(day, firstDayCurrentMonth),
+                  "bg-green-500 text-white dark:bg-green-500": isCompleted,
                 }
               )}
             >

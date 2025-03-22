@@ -1,11 +1,10 @@
 "use client";
 
 import { createHabitEntry } from "@/actions/habitentries/create";
-import { toastOptions } from "@/lib/utils";
-import { Habit, HabitEntry } from "@prisma/client";
+import { deleteHabitEntry } from "@/actions/habitentries/delete";
+import { Habit } from "@prisma/client";
 import toast from "react-hot-toast";
 import { Calendar } from "./Calendar";
-import { deleteHabitEntry } from "@/actions/habitentries/delete";
 
 export const HabitCalendar = ({
   habit,
@@ -16,9 +15,7 @@ export const HabitCalendar = ({
 }) => {
   const completeDate = async (date: Date) => {
     const result = await createHabitEntry({ date, habitId: habit.id });
-    if (result.success) {
-      toast.success("Completed!", toastOptions);
-    } else {
+    if (!result.success) {
       toast.error("something went wrong");
     }
   };
@@ -38,9 +35,7 @@ export const HabitCalendar = ({
       habitId: habit.id,
       userId: entry.userId,
     });
-    if (result.success) {
-      toast.success("Removed", toastOptions);
-    } else {
+    if (!result.success) {
       toast.error("something went wrong");
     }
   };
