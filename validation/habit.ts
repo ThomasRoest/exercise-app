@@ -5,3 +5,8 @@ export const habitSchema = z.object({
     message: "Title must be at least 3 characters long",
   }),
 });
+
+export const habitEntrySchema = z.object({
+  date: z.date(),
+  habitId: z.string(),
+});

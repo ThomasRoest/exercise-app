@@ -1,9 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar } from "./Calendar";
 import { Habit } from "@prisma/client";
 import { DeleteHabit } from "./DeleteHabit";
+import { HabitCalendar } from "./HabitCalendar";
+import { getUserHabitEntries } from "@/data/habits";
 
-export const HabitCard = ({ habit }: { habit: Habit }) => {
+export const HabitCard = async ({ habit }: { habit: Habit }) => {
+  const entries = await getUserHabitEntries();
   return (
     <Card className="bg-white shadow rounded-lg max-w-[500px] dark:bg-gray-800">
       <CardHeader className="rounded-t-lg border-b">
@@ -16,7 +18,7 @@ export const HabitCard = ({ habit }: { habit: Habit }) => {
         </div>
       </CardHeader>
       <CardContent className="pt-4">
-        <Calendar />
+        <HabitCalendar habit={habit} entries={entries} />
       </CardContent>
     </Card>
   );

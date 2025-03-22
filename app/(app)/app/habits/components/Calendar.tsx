@@ -28,8 +28,13 @@ const colStartClasses = [
   "col-start-7",
 ];
 
-export const Calendar = () => {
-  const [completedDays, setCompletedDays] = useState<string[]>([]);
+interface CalendarProps {
+  completeDate: (date: Date) => void;
+  completedDays: string[];
+  removeDate: (date: Date) => void;
+}
+
+export const Calendar = ({ completeDate, completedDays, removeDate }: CalendarProps) => {
   const today = startOfToday();
   // should be moved to url state?
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
@@ -56,20 +61,6 @@ export const Calendar = () => {
     setCurrentMonth(format(today, "MMM-yyyy"));
   };
 
-  const toggleCompleted = (day: Date) => {
-    const dateString = day.toDateString();
-
-    if (completedDays.includes(dateString)) {
-      setCompletedDays((state) => {
-        return state.filter((day) => day !== dateString);
-      });
-    } else {
-      setCompletedDays((state) => {
-        return [...state, day.toDateString()];
-      });
-    }
-  };
-
   return (
     <div>
       <div className="flex justify-between mb-6">
@@ -94,18 +85,23 @@ export const Calendar = () => {
           );
         })}
         {days.map((day) => {
+          const isCompleted = completedDays.includes(day.toDateString());
           return (
             <button
               key={day.toString()}
-              onClick={() => toggleCompleted(day)}
+              onClick={() => {
+                if (isCompleted) {
+                  removeDate(day)
+                } else {
+                  completeDate(day);
+                }
+              }}
               className={cn(
                 ` w-8 h-8 rounded-full text-sm ${colStartClasses[getDay(day)]}`,
                 {
                   "border-2 border-blue-600": isToday(day),
                   "bg-gray-200": isSameMonth(day, firstDayCurrentMonth),
-                  "bg-green-500 text-white": completedDays.includes(
-                    day.toDateString()
-                  ),
+                  "bg-green-500 text-white": isCompleted,
                 }
               )}
             >

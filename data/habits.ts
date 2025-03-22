@@ -19,3 +19,19 @@ export const getUserHabits = async () => {
     },
   });
 };
+
+export const getUserHabitEntries = async () => {
+  const user = await getCurrentUser();
+  if (!user) {
+    return []
+  }
+
+  return await prisma.habitEntry.findMany({
+    where: { userId: user.id },
+    select: {
+      id: true,
+      completedAt: true,
+      userId: true,
+    },
+  });
+};
