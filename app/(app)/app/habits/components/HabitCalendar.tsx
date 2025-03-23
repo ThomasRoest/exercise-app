@@ -40,12 +40,21 @@ export const HabitCalendar = ({
     }
   };
 
+  const days = entries.map((entry) => {
+    return entry.completedAt.toISOString();
+  });
+
   const completedDays = entries.map((entry) => {
     return entry.completedAt.toDateString();
   });
 
   return (
     <>
+    <pre>
+      <code style={{fontSize: 12, color: 'darkred'}}>
+        {JSON.stringify(days, null, 2)}
+      </code>
+    </pre>
     <pre>
       <code style={{fontSize: 12, color: 'darkred'}}>
         {JSON.stringify(completedDays, null, 2)}
