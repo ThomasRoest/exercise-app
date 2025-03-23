@@ -46,6 +46,11 @@ export const HabitCalendar = ({
 
   return (
     <>
+    <pre>
+      <code style={{fontSize: 12, color: 'darkred'}}>
+        {JSON.stringify(completedDays, null, 2)}
+      </code>
+    </pre>
       <Calendar
         completeDate={completeDate}
         removeDate={removeDate}
