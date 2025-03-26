@@ -7,6 +7,6 @@ export const habitSchema = z.object({
 });
 
 export const habitEntrySchema = z.object({
-  date: z.date(),
+  date: z.string(),
   habitId: z.string(),
 });

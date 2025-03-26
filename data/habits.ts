@@ -35,3 +35,30 @@ export const getUserHabitEntries = async () => {
     },
   });
 };
+
+
+export const getUserHabit = async ({ slug }: { slug: string }) => {
+  const user = await getCurrentUser();
+  if (!user) {
+    return null
+  }
+
+  return await prisma.habit.findFirst({
+    where: { 
+      userId: user.id,
+      slug,
+    },
+    select: {
+      id: true,
+      title: true,
+      userId: true,
+      habitEntries: {
+        select: {
+          id: true,
+          completedAt: true,
+          userId: true
+        },
+      },
+    },
+  });
+};

@@ -3,7 +3,8 @@ import { IconHabits } from "@/components/icons/IconHabits";
 import { PageContainer } from "@/components/PageContainer";
 import { PageHeader } from "@/components/PageHeader";
 import { getUserHabits } from "@/data/habits";
-import { HabitCard } from "./components/HabitCard";
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { HabitForm } from "./components/HabitForm";
 
 const HabitsPage = async () => {
@@ -17,9 +18,23 @@ const HabitsPage = async () => {
         </div>
       </PageHeader>
       <div className="flex flex-col gap-y-2">
-        {habits?.map((habit) => {
-          return <HabitCard key={habit.id} habit={habit} />;
-        })}
+        <ul className="space-y-2">
+          {habits?.map((habit) => {
+            return (
+              <li key={habit.id}>
+                <Link
+                  href={`/app/habits/${habit.slug}`}
+                  className="block w-full p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow duration-200 hover:bg-gray-50"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-800 font-medium">{habit.title}</span>
+                    <ChevronRight className="text-gray-400" /> 
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </div>
       <FloatingActionButton>
         <HabitForm />

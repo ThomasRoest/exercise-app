@@ -29,9 +29,9 @@ const colStartClasses = [
 ];
 
 interface CalendarProps {
-  completeDate: (date: Date) => void;
+  completeDate: (date: string) => void;
   completedDays: string[];
-  removeDate: (date: Date) => void;
+  removeDate: (date: string) => void;
 }
 
 export const Calendar = ({ completeDate, completedDays, removeDate }: CalendarProps) => {
@@ -85,15 +85,16 @@ export const Calendar = ({ completeDate, completedDays, removeDate }: CalendarPr
           );
         })}
         {days.map((day) => {
-          const isCompleted = completedDays.includes(day.toDateString());
+          const formattedDate = format(day, 'yyyy-MM-dd');
+          const isCompleted = completedDays.includes(formattedDate);
           return (
             <button
               key={day.toString()}
               onClick={() => {
                 if (isCompleted) {
-                  removeDate(day)
+                  removeDate(formattedDate)
                 } else {
-                  completeDate(day);
+                  completeDate(formattedDate);
                 }
               }}
               className={cn(

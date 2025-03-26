@@ -3,7 +3,7 @@
 import { getCurrentUser } from "@/data/users";
 import prisma from "@/prisma/db";
 import { ActionResult } from "@/types";
-import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const schema = z.object({
@@ -46,10 +46,5 @@ export const deleteHabit = async (habit: {
     };
   }
 
-  revalidatePath("/app/habits");
-
-  return {
-    success: true,
-    message: "deleted",
-  };
+  redirect('/app/habits')
 };

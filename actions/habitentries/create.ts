@@ -7,7 +7,10 @@ import { habitEntrySchema } from "@/validation/habit";
 import { revalidatePath } from "next/cache";
 
 export const createHabitEntry = async (
-  data: unknown
+  data: {
+    date: string;
+    habitId: string;
+  }
 ): Promise<ActionResult> => {
   const validationResult = habitEntrySchema.safeParse(data);
   if (!validationResult.success) {

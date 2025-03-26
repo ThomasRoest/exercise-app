@@ -140,7 +140,7 @@ model Habit {
 
 model HabitEntry {
   id          String   @id @default(cuid())
-  completedAt DateTime
+  completedAt String
   userId      String
   habitId     String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)

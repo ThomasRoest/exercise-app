@@ -1,35 +1,37 @@
 "use client";
 
 import { createHabitEntry } from "@/actions/habitentries/create";
-import { deleteHabitEntry } from "@/actions/habitentries/delete";
-import { Habit } from "@prisma/client";
 import toast from "react-hot-toast";
 import { Calendar } from "./Calendar";
+import { deleteHabitEntry } from "@/actions/habitentries/delete";
 
-export const HabitCalendar = ({
-  habit,
-  entries,
-}: {
-  habit: Habit;
-  entries: { id: string; completedAt: Date; userId: string }[];
-}) => {
-  const completeDate = async (date: Date) => {
-    const result = await createHabitEntry({ date, habitId: habit.id });
+interface HabitCalendarProps {
+  habit: {
+    id: string;
+    title: string;
+    habitEntries: { id: string; completedAt: string; userId: string }[];
+  };
+}
+
+export const HabitCalendar = ({ habit }: HabitCalendarProps) => {
+  const completeDate = async (date: string) => {
+    const result = await createHabitEntry({
+      date,
+      habitId: habit.id,
+    });
     if (!result.success) {
-      toast.error("something went wrong");
+      toast.error(`something went wrong ${result.message}`);
     }
   };
 
-  const removeDate = async (date: Date) => {
-    const entry = entries.find((entry) => {
-      return entry.completedAt.toDateString() === date.toDateString();
+  const removeDate = async (date: string) => {
+    const entry = habit.habitEntries.find((entry) => {
+      return entry.completedAt === date;
     });
-
     if (!entry) {
       toast.error("something went wrong");
       return;
     }
-
     const result = await deleteHabitEntry({
       id: entry.id,
       habitId: habit.id,
@@ -40,31 +42,15 @@ export const HabitCalendar = ({
     }
   };
 
-  const days = entries.map((entry) => {
-    return entry.completedAt.toISOString();
-  });
-
-  const completedDays = entries.map((entry) => {
-    return entry.completedAt.toDateString();
+  const completedDays = habit.habitEntries.map((entry) => {
+    return entry.completedAt;
   });
 
   return (
-    <>
-    <pre>
-      <code style={{fontSize: 12, color: 'darkred'}}>
-        {JSON.stringify(days, null, 2)}
-      </code>
-    </pre>
-    <pre>
-      <code style={{fontSize: 12, color: 'darkred'}}>
-        {JSON.stringify(completedDays, null, 2)}
-      </code>
-    </pre>
-      <Calendar
-        completeDate={completeDate}
-        removeDate={removeDate}
-        completedDays={completedDays}
-      />
-    </>
+    <Calendar
+      completeDate={completeDate}
+      removeDate={removeDate}
+      completedDays={completedDays}
+    />
   );
 };
