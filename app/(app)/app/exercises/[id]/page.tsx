@@ -57,9 +57,9 @@ const Page = async (props: {
             return (
               <li
                 key={set.id}
-                className="bg-white p-4 rounded-md shadow-sm flex justify-between"
+                className="bg-white p-4 rounded-md shadow-sm flex justify-between dark:bg-gray-800 dark:text-gray-300"
               >
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-gray-500 dark:text-gray-300">
                   {formatDate(set.createdAt)} - {set.exerciseTitle}
                 </span>
                 <span className="text-sm">

@@ -14,7 +14,7 @@ export const DeleteButton = ({
     <Button
       size="icon"
       onClick={onClick}
-      className="bg-transparent text-slate-400 hover:bg-slate-200"
+      variant="outline"
     >
       {isPending && <Loader2 className="animate-spin" />}
       <Trash2 />

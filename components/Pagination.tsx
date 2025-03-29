@@ -15,7 +15,7 @@ const PaginationArrow = ({
   isDisabled?: boolean;
 }) => {
   const className = cn(
-    "flex h-10 w-10 items-center justify-center rounded-md border bg-white",
+    "flex h-10 w-10 items-center justify-center rounded-md border bg-white dark:bg-gray-800 dark:text-gray-200",
     {
       "pointer-events-none text-gray-300": isDisabled,
       "hover:bg-gray-100": !isDisabled,

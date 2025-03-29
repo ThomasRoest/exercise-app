@@ -24,7 +24,7 @@ const MyHabitPage = async ({
       <PageHeader className="flex justify-between items-center">
         <div className="flex gap-x-2">
           <IconHabits />
-          <h1 className="font-bold">Habits</h1>
+          <h1 className="font-bold dark:text-gray-200">Habits</h1>
         </div>
       </PageHeader>
       <Card className="bg-white shadow rounded-lg dark:bg-gray-800">

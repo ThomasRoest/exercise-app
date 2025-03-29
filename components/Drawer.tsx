@@ -48,7 +48,7 @@ export const Drawer = ({
         })}
       >
         {header && (
-          <div className="flex items-center justify-between p-2 border-b">
+          <div className="flex items-center justify-between p-2 border-b border-gray-200 dark:border-gray-700">
             <span className="font-bold">{title}</span>
             <Button variant="outline" size="icon" onClick={close}>
               {position === "left" && <SidebarClose className="h-4 w-4" />}

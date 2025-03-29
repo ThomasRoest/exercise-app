@@ -12,7 +12,7 @@ export const Form = ({ action, children, formRef, className }: FormProps) => {
     <form
       ref={formRef}
       action={action}
-      className={cn("w-full flex flex-col gap-4 bg-white p-4", className)}
+      className={cn("w-full flex flex-col gap-4 bg-white p-4 dark:bg-gray-800 dark:text-gray-200", className)}
     >
       {children}
     </form>
