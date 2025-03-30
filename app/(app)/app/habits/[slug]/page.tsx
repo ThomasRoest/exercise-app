@@ -32,7 +32,6 @@ const MyHabitPage = async ({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-x-2">
               <CardTitle className="text-lg font-bold">{habit.title}</CardTitle>
-              <div className="text-sm font-semibold text-gray-500">4/31</div>
             </div>
             <DeleteHabit habit={habit} />
           </div>
