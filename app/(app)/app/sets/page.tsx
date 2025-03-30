@@ -52,7 +52,7 @@ const SetsPage = async (props: { searchParams: Promise<unknown> }) => {
     <PageContainer>
       <PageHeader>
         <IconSets />
-        <h1 className="font-bold">{`All sets (${totalCount})`}</h1>
+        <h1 className="font-bold dark:text-gray-200">{`All sets (${totalCount})`}</h1>
       </PageHeader>
       <SetFilters exercises={exercises} />
       <ul className="space-y-2">

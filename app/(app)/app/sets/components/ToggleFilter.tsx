@@ -20,7 +20,7 @@ export const ToggleFilter = ({
   toggleKey,
   onToggle,
 }: Props) => {
-  const inactiveClass = "bg-white"
+  const inactiveClass = "bg-white dark:bg-gray-800 dark:text-gray-400 dark:border-gray-500"
   const activeClass = "bg-gray-500 text-white"
 
   return (

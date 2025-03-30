@@ -21,7 +21,7 @@ export const FloatingActionButton = ({ children }: { children: ReactNode }) => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button className="fixed bottom-20 right-4 rounded-full">
+        <Button className="fixed bottom-20 right-4 rounded-full dark:border dark:border-gray-400">
           Add new <Plus className="ml-2 h-5 w-5" />
         </Button>
       </DrawerTrigger>
