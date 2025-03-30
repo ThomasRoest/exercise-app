@@ -16,7 +16,6 @@ export const deleteHabit = async (habit: {
   userId: string;
 }): Promise<ActionResult> => {
   const user = await getCurrentUser();
-
   const validated = schema.safeParse(habit);
 
   if (!validated.success) {
