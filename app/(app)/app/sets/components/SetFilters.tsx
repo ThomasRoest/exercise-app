@@ -39,34 +39,6 @@ export const SetFilters = ({ exercises }: { exercises: Exercise[] }) => {
         }}
       />
       {isPending && <Loader2 className="animate-spin" />}
-      {/* <button
-        className={cn(
-          "text-sm h-8 border rounded-lg px-2 py-1 active:bg-gray-500 active:text-white flex items-center gap-1"
-        )}
-        onClick={() => {
-          setSortOrder();
-        }}
-      >
-        Sort
-        {sortOrder === "desc" ? (
-          <ArrowDown className="h-4 w-4 text-gray-500" />
-        ) : (
-          <ArrowUp className="h-4 w-4 text-gray-500" />
-        )}
-      </button> */}
-      {/* <button
-        className={cn(
-          "text-sm border h-8 rounded-lg px-2 py-1 active:bg-gray-500 active:text-white flex items-center gap-1"
-        )}
-        onClick={() => {
-          const newUrl = new URL(window.location.href);
-          newUrl.search = "";
-          router.push(newUrl.toString());
-        }}
-      >
-        Clear all
-        <X className="h-4 w-4 text-gray-500" />
-      </button> */}
     </div>
   );
 };
