@@ -18,7 +18,7 @@ export const EditNoteForm = ({ note }: { note: Program }) => {
   );
   const [isEditing, setIsEditing] = useState(false);
   const [isPending, setIsPending] = useState(false);
-  const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsEditing(true);
@@ -60,17 +60,20 @@ export const EditNoteForm = ({ note }: { note: Program }) => {
     if (!textAreaRef.current) {
       return;
     }
-    const textarea = textAreaRef.current
+    const textarea = textAreaRef.current;
     if (textarea) {
-      textarea.style.height = 'auto';
+      textarea.style.height = "auto";
       textarea.style.height = `${textarea.scrollHeight}px`;
     }
-  }, [])
+  }, []);
 
   return (
-    <form className="flex flex-col gap-y-4 p-4" onSubmit={handleSubmit}>
+    <form
+      className="flex flex-col gap-y-4 pt-8 pl-4 pr-4 pb-10 dark:bg-gray-800 rounded"
+      onSubmit={handleSubmit}
+    >
       <div>
-        <Label htmlFor="title" className="font-bold">
+        <Label htmlFor="title" className=" dark:text-gray-300 mb-1">
           Title
         </Label>
         <Input
@@ -79,10 +82,11 @@ export const EditNoteForm = ({ note }: { note: Program }) => {
           name="title"
           value={title}
           onChange={handleTitleChange}
+          className="dark:bg-gray-700 dark:text-gray-200"
         />
       </div>
       <div>
-        <Label htmlFor="description" className="font-bold">
+        <Label htmlFor="description" className=" dark:text-gray-300">
           Description
         </Label>
         <Textarea
@@ -91,15 +95,21 @@ export const EditNoteForm = ({ note }: { note: Program }) => {
           name="description"
           value={description ?? ""}
           onChange={handleDescriptionChange}
+          className="dark:bg-gray-700 dark:text-gray-200"
         />
       </div>
       {isEditing && (
         <div className="flex gap-4 justify-end">
-          <Button variant="outline" onClick={handleCancel} type="button">
+          <Button
+            className="dark:bg-gray-700 dark:text-gray-300"
+            variant="outline"
+            onClick={handleCancel}
+            type="button"
+          >
             <X className="w-4 h-4 mr-2" />
             Cancel
           </Button>
-          <Button>
+          <Button className="dark:bg-indigo-600 dark:hover:bg-indigo-700">
             <Save className="w-4 h-4 mr-2" />
             {isPending ? (
               <Loader2 className="animate-spin ml-2 w-4 h-4" />

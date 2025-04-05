@@ -9,7 +9,7 @@ export const SubmitButton = ({ children }: { children: ReactNode }) => {
   const { pending } = useFormStatus();
 
   return (
-    <Button size="sm" type="submit" aria-disabled={pending} disabled={pending}>
+    <Button className="dark:bg-indigo-600 dark:hover:bg-indigo-700" size="sm" type="submit" aria-disabled={pending} disabled={pending}>
       {pending ? (
         <>
           {children}

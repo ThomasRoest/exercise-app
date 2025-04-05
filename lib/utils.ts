@@ -28,10 +28,14 @@ export const sleep = (time = 1000) => {
 export const toastOptions: ToastOptions = {
   duration: 3000,
   position: "top-center",
+  style: {
+    backgroundColor: "gray",
+    color: "white",
+  },
 };
 
-export const dateFormatter = new Intl.DateTimeFormat('nl-NL', {
-  day: '2-digit',
-  month: '2-digit',
-  year: 'numeric',
+export const dateFormatter = new Intl.DateTimeFormat("nl-NL", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
 });

@@ -27,7 +27,12 @@ export const HabitForm = ({ onSuccess }: { onSuccess?: () => void }) => {
         <FormHeader>Add habit</FormHeader>
         <div className="flex flex-col gap-2">
           <Label htmlFor="title">Title</Label>
-          <Input id="title" name="title" placeholder="Add title..." />
+          <Input
+            id="title"
+            name="title"
+            placeholder="Add title..."
+            className="dark:bg-gray-700 dark:text-gray-200"
+          />
         </div>
         <SubmitButton>Create</SubmitButton>
       </Form>

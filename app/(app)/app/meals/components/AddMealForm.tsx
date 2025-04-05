@@ -34,6 +34,7 @@ export const AddMealForm = () => {
           name="title"
           placeholder="Add new item"
           aria-label="New item name"
+          className="dark:bg-gray-700 dark:text-gray-200"
         />
         <SubmitButton>
           <PlusCircle className="h-4 w-4 mr-2" />

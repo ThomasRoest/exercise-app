@@ -35,7 +35,13 @@ export const NewNoteForm = ({ onSuccess }: { onSuccess?: () => void }) => {
       <FormHeader>Add note</FormHeader>
       <InputGroup>
         <Label htmlFor="title">Title</Label>
-        <Input id="title" name="title" placeholder="Add title..." required />
+        <Input
+          id="title"
+          name="title"
+          placeholder="Add title..."
+          required
+          className="dark:bg-gray-700 dark:text-gray-200"
+        />
       </InputGroup>
       <InputGroup>
         <Label htmlFor="description">Description</Label>
@@ -44,6 +50,7 @@ export const NewNoteForm = ({ onSuccess }: { onSuccess?: () => void }) => {
           id="description"
           name="description"
           required
+          className="dark:bg-gray-700 dark:text-gray-200"
         />
       </InputGroup>
       <SubmitButton>Create</SubmitButton>

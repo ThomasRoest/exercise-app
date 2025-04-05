@@ -84,6 +84,7 @@ export const WorkoutSetForm = ({ workoutId, exercises, onSuccess }: Props) => {
           placeholder="Add reps..."
           type="number"
           defaultValue={5}
+          className="dark:bg-gray-700 dark:text-gray-200"
         />
       </InputGroup>
       <InputGroup>
@@ -93,6 +94,7 @@ export const WorkoutSetForm = ({ workoutId, exercises, onSuccess }: Props) => {
           name="weight"
           placeholder="Add weight..."
           type="number"
+          className="dark:bg-gray-700 dark:text-gray-200"
         />
       </InputGroup>
       <Input
@@ -100,12 +102,14 @@ export const WorkoutSetForm = ({ workoutId, exercises, onSuccess }: Props) => {
         id="workoutId"
         name="workoutId"
         defaultValue={workoutId}
+        className="dark:bg-gray-700 dark:text-gray-200"
       />
       <Input
         type="hidden"
         id="exerciseTitle"
         name="exerciseTitle"
         defaultValue={selectedExercise?.title}
+        className="dark:bg-gray-700 dark:text-gray-200"
       />
       <SubmitButton>Create</SubmitButton>
     </Form>

@@ -26,12 +26,13 @@ export const WorkoutForm = ({ onSuccess }: { onSuccess?: () => void }) => {
     >
       <FormHeader>Add workout</FormHeader>
       <div className="flex flex-col gap-2">
-        <Label htmlFor="description">Description</Label>
+        <Label htmlFor="description" className="dark:text-gray-300">Description</Label>
         <Input
           id="description"
           name="description"
           placeholder="Add description..."
           defaultValue="Gym"
+          className="dark:bg-gray-700 dark:text-gray-200"
         />
       </div>
       <SubmitButton>Create</SubmitButton>
