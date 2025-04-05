@@ -49,12 +49,12 @@ const ProgressPage = async ({
   return (
     <PageContainer>
       <Filters />
-      <ul>
+      <ul className="flex flex-col gap-2">
         {sets?.map((set) => {
           return (
             <li
               key={set.id}
-              className="border bg-white p-2 rounded flex items-center gap-x-4"
+              className=" bg-white p-3 rounded flex items-center gap-x-4 dark:bg-gray-800 dark:text-gray-300"
             >
               <div>
                 {set.exerciseTitle} {set.reps} x

@@ -28,7 +28,7 @@ const WorkoutPage = async (props: { params: Promise<{ id: string }> }) => {
       <PageHeader className="justify-between gap-1">
         <div className="basis-[40px]" />
         <div className="text-center flex items-center gap-x-1">
-          <h1 className="font-bold tracking-wider text-blue-800">
+          <h1 className="font-bold tracking-wider text-blue-800 dark:text-gray-400">
             {formatDate(workout.createdAt)}
           </h1>
           <CreateNoteButton workoutId={workout.id} note={workout.note} />

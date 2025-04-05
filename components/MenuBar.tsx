@@ -5,7 +5,7 @@ import { IconWorkout } from "./icons/IconWorkout";
 import { MenuBarLink } from "./MenuBarLink";
 
 const Label = ({ text }: { text: string }) => {
-  return <span className="text-xs mt-1 text-gray-600">{text}</span>;
+  return <span className="text-xs mt-1 text-gray-600 dark:text-gray-500">{text}</span>;
 };
 
 const links = [
