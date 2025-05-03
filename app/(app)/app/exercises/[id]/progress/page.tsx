@@ -19,13 +19,25 @@ const SetListItem = ({
 }: SetListItemProps) => {
   return (
     <li
-      className="bg-white p-3 rounded flex items-center gap-x-4 dark:bg-gray-800 dark:text-gray-300"
+      className="bg-white p-3 rounded-md border border-gray-50 flex justify-between items-center hover:bg-gray-50 transition-all duration-200 dark:bg-gray-800/90 dark:text-gray-200 dark:border-gray-800 dark:hover:bg-gray-800"
     >
-      <div>
-        {exerciseTitle} {reps ?? 0} x
-        <span className="font-bold ml-1">{weight ?? 0}</span>
+      <div className="flex items-center gap-3">
+        <div className="bg-blue-50 dark:bg-blue-900/20 p-2 rounded-md">
+          <span className="font-medium text-blue-600 dark:text-blue-400">
+            {exerciseTitle}
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="text-gray-500 dark:text-gray-400">{reps ?? 0}</span>
+          <span className="text-xs text-gray-400 dark:text-gray-500">reps</span>
+          <span className="text-gray-500 dark:text-gray-400 mx-0.5">×</span>
+          <span className="font-medium text-gray-700 dark:text-gray-300">{weight ?? 0}</span>
+          <span className="text-xs text-gray-400 dark:text-gray-500">kg</span>
+        </div>
       </div>
-      {createdAt.getFullYear()}
+      <div className="text-sm text-gray-400 dark:text-gray-500 bg-gray-50/70 dark:bg-gray-700/30 py-1 px-2 rounded">
+        {createdAt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
+      </div>
     </li>
   );
 };
