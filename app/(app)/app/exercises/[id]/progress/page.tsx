@@ -4,6 +4,32 @@ import { Filters } from "./filters";
 import { z } from "zod";
 import { Prisma } from "@prisma/client";
 
+interface SetListItemProps {
+  exerciseTitle: string | null;
+  reps: number | null;
+  weight: number | null;
+  createdAt: Date;
+}
+
+const SetListItem = ({
+  exerciseTitle,
+  reps,
+  weight,
+  createdAt,
+}: SetListItemProps) => {
+  return (
+    <li
+      className="bg-white p-3 rounded flex items-center gap-x-4 dark:bg-gray-800 dark:text-gray-300"
+    >
+      <div>
+        {exerciseTitle} {reps ?? 0} x
+        <span className="font-bold ml-1">{weight ?? 0}</span>
+      </div>
+      {createdAt.getFullYear()}
+    </li>
+  );
+};
+
 const filterSchema = z.object({
   filter: z
     .string()
@@ -50,20 +76,15 @@ const ProgressPage = async ({
     <PageContainer>
       <Filters />
       <ul className="flex flex-col gap-2">
-        {sets?.map((set) => {
-          return (
-            <li
-              key={set.id}
-              className=" bg-white p-3 rounded flex items-center gap-x-4 dark:bg-gray-800 dark:text-gray-300"
-            >
-              <div>
-                {set.exerciseTitle} {set.reps} x
-                <span className="font-bold ml-1">{set.weight}</span>
-              </div>
-              {set.createdAt.getFullYear()}
-            </li>
-          );
-        })}
+        {sets?.map((set) => (
+          <SetListItem
+            key={set.id}
+            exerciseTitle={set.exerciseTitle}
+            reps={set.reps}
+            weight={set.weight}
+            createdAt={set.createdAt}
+          />
+        ))}
       </ul>
     </PageContainer>
   );
