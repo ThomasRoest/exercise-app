@@ -1,78 +1,84 @@
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-const userId = process.env.MOCK_USER_ID as string;
-const reps = 5;
-const getWeight = () => {
-  const weightOptions = [10, 20, 30, 40, 50, 60];
-  return weightOptions[Math.floor(Math.random() * weightOptions.length)];
+
+const createExercises = async (userId: string) => {
+  await prisma.exercise.createMany({
+    data: [
+      {
+        title: "Overhead press",
+        slug: "overhead-press",
+        userId,
+      },
+      {
+        title: "Benchpress",
+        slug: "benchpress",
+        userId,
+      },
+      {
+        title: "Squat",
+        slug: "squat",
+        userId,
+      },
+      {
+        title: "Deadlift",
+        slug: "deadlift",
+        userId,
+      },
+      {
+        title: "Barbell row",
+        slug: "barbell-row",
+        userId,
+      },
+      {
+        title: "Legpress",
+        slug: "legpress",
+        userId,
+      },
+    ],
+  });
 };
 
-const workouts = Array.from({ length: 10 }).map((_, index) => {
-  let description = "gym workout a";
-  if (index % 2 === 0) {
-    description = "gym workout b";
-  }
+const createWorkouts = async (userId: string) => {
+  const sets = [
+    { exerciseTitle: "benchpress", reps: 5, weight: 30, userId },
+    { exerciseTitle: "benchpress", reps: 5, weight: 30, userId },
+    { exerciseTitle: "benchpress", reps: 5, weight: 30, userId },
+    { exerciseTitle: "benchpress", reps: 5, weight: 30, userId },
+    { exerciseTitle: "squat", reps: 5, weight: 20, userId },
+    { exerciseTitle: "squat", reps: 5, weight: 20, userId },
+    { exerciseTitle: "squat", reps: 5, weight: 20, userId },
+    { exerciseTitle: "squat", reps: 5, weight: 20, userId },
+    { exerciseTitle: "deadlift", reps: 5, weight: 40, userId },
+    { exerciseTitle: "deadlift", reps: 5, weight: 40, userId },
+    { exerciseTitle: "deadlift", reps: 5, weight: 40, userId },
+    { exerciseTitle: "deadlift", reps: 5, weight: 40, userId },
+  ];
 
-  return {
-    description,
-    userId,
-  };
-});
-
-const setsA = Array.from({ length: 15 }).map((_, index) => {
-  let exercise = "squat";
-
-  if (index < 5) {
-    exercise = "squat";
-  } else if (index < 10) {
-    exercise = "bench_press";
-  } else if (index < 15) {
-    exercise = "barbell_row";
-  }
-
-  return {
-    exercise,
-    userId,
-    reps,
-    weight: getWeight(),
-  };
-});
-
-const setsB = Array.from({ length: 15 }).map((_, index) => {
-  let exercise = "squat";
-
-  if (index < 5) {
-    exercise = "squat";
-  } else if (index < 10) {
-    exercise = "overhead_press";
-  } else if (index < 15) {
-    exercise = "deadlift";
-  }
-
-  return {
-    exercise,
-    userId,
-    reps,
-    weight: getWeight(),
-  };
-});
-
-async function main() {
-  for (const workout of workouts) {
+  for (let i = 0; i < 5; i++) {
     await prisma.workout.create({
       data: {
-        description: workout.description,
-        userId: workout.userId,
+        description: "gym",
+        userId,
+        note: i % 2 === 0 ? "Some note" : void 0,
         sets: {
-          createMany: {
-            data: workout.description === "gym workout a" ? setsA : setsB,
-          },
+          create: sets,
         },
       },
     });
-    console.log("Added workout");
   }
+};
+
+async function main() {
+  const userId = null;
+
+  if (!userId) {
+    throw new Error("add userId for seed data");
+  }
+
+  console.log("run seed...");
+  await createExercises(userId);
+  await createWorkouts(userId);
 }
 
 main()
