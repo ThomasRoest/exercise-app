@@ -61,7 +61,7 @@ const Workouts = async ({
       </div>
       <Suspense
         fallback={
-          <div className="space-x-4 bg-white p-4 rounded-md">
+          <div className="space-x-4 light:bg-white p-4 rounded-md">
             <div className="space-y-2">
               <Skeleton className="h-10 w-[100%]" />
               <Skeleton className="h-10 w-[100%]" />
