@@ -10,13 +10,13 @@ export const DeleteHabit = ({
   habit: { id: string; userId: string };
 }) => {
   const [showDialog, setShowDialog] = useState(false);
-  const [_, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   const onDelete = useCallback(async () => {
     startTransition(async () => {
       await deleteHabit(habit);
     });
-  }, []);
+  }, [habit]);
 
   return (
     <ActionMenu

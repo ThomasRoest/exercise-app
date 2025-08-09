@@ -3,7 +3,7 @@ import { Meal } from "@prisma/client";
 import { ReactElement } from "react";
 import { DeleteMeal } from "./DeleteMeal";
 
-export const MealItem = ({ meal }: { meal: Meal }): ReactElement<any> => {
+export const MealItem = ({ meal }: { meal: Meal }): ReactElement => {
   return (
     <ListItem>
       <div className="flex-1">

@@ -21,7 +21,7 @@ const getInitialState = (exercises: Exercise[]): Exercise | null => {
         return exercise;
       }
     }
-  } catch (error) {
+  } catch {
     return null;
   }
   if (exercises.length > 0) {

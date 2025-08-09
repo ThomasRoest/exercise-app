@@ -9,7 +9,7 @@ export const WorkoutItem = ({
   workout,
 }: {
   workout: Workout;
-}): ReactElement<any> => {
+}): ReactElement => {
   return (
     <li>
       <Link

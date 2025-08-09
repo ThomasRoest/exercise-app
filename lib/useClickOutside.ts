@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 
 type CallbackFunction = (event: MouseEvent | TouchEvent) => void;
 

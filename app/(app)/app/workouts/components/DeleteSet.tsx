@@ -28,7 +28,7 @@ export const DeleteSet = ({ set }: { set: Set }) => {
         setIsOpen(false);
       }
     });
-  }, []);
+  }, [set]);
 
   return (
     <DropdownMenu onOpenChange={setIsOpen} open={open}>
