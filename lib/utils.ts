@@ -19,6 +19,10 @@ export const formatDate = (date: Date) => {
   return capitalize(formatted);
 };
 
+export const getYear = (date: Date) => {
+  return date.getFullYear();
+};
+
 export const sleep = (time = 1000) => {
   return new Promise((resolve) => {
     setTimeout(resolve, time);
