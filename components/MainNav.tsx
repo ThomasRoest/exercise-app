@@ -27,7 +27,7 @@ const NavLink = ({
       <button
         onClick={() => navigate(href)}
         className={cn(
-          "flex w-full gap-x-2 px-2 py-4 border-b dark:border-gray-700 items-center text-sm active:bg-gray-200",
+          "flex w-full gap-x-2 px-2 py-4 border-b dark:border-gray-700 items-center text-sm active:bg-gray-200 dark:active:bg-gray-800",
           {
             "font-bold border-r-4 border-r-blue-500 ": href === path,
           }
