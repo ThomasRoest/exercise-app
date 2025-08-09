@@ -13,7 +13,7 @@ const currentYear = new Date().getFullYear();
 const Workouts = async ({
   searchParams,
 }: {
-  searchParams: { year: string };
+  searchParams: Promise<{ year: string }>
 }) => {
   const params = await searchParams;
   const workouts = await getUserWorkouts({ year: parseInt(params.year) });
