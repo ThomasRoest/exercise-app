@@ -25,7 +25,3 @@ Next.js, React, TypeScript, Tailwind, Prisma, Postgres
 ---
 
 <img src="images/Screenshot%202025-06-15%20at%2012.25.01.png" alt="workout" width="400">
-
----
-
-<img src="images/Screenshot%202025-06-15%20at%2012.27.44.png" alt="habit" width="400">
