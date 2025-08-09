@@ -2,31 +2,27 @@ import { FloatingActionButton } from "@/components/FloatingActionButton";
 import { IconWorkout } from "@/components/icons/IconWorkout";
 import { PageContainer } from "@/components/PageContainer";
 import { PageHeader } from "@/components/PageHeader";
-import { getUserWorkouts } from "@/data/workouts";
-import { WorkoutItem } from "./components/WorkoutItem";
-import { WorkoutForm } from "./new/WorkoutForm";
 import { Button, ButtonProps } from "@/components/ui/button";
 import Link from "next/link";
+import { WorkoutForm } from "./new/WorkoutForm";
+import { WorkoutsList } from "./components/WorkoutsList";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const currentYear = new Date().getFullYear();
 
 const Workouts = async ({
   searchParams,
 }: {
-  searchParams: Promise<{ year: string }>
+  searchParams: Promise<{ year: string }>;
 }) => {
   const params = await searchParams;
-  const workouts = await getUserWorkouts({ year: parseInt(params.year) });
 
   const years = [
     { id: currentYear, defaultActive: true },
     { id: currentYear - 1, defaultActive: false },
     { id: currentYear - 2, defaultActive: false },
   ];
-
-  if (!workouts) {
-    return <>Unavailable</>;
-  }
 
   return (
     <PageContainer>
@@ -63,11 +59,23 @@ const Workouts = async ({
           );
         })}
       </div>
-      <ul className="space-y-2">
-        {workouts.map((workout) => {
-          return <WorkoutItem key={workout.id} workout={workout} />;
-        })}
-      </ul>
+      <Suspense
+        fallback={
+          <div className="space-x-4 bg-white p-4 rounded-md">
+            <div className="space-y-2">
+              <Skeleton className="h-10 w-[100%]" />
+              <Skeleton className="h-10 w-[100%]" />
+              <Skeleton className="h-10 w-[100%]" />
+              <Skeleton className="h-10 w-[100%]" />
+              <Skeleton className="h-10 w-[100%]" />
+              <Skeleton className="h-10 w-[100%]" />
+              <Skeleton className="h-10 w-[100%]" />
+            </div>
+          </div>
+        }
+      >
+        <WorkoutsList searchParams={searchParams} />
+      </Suspense>
       <FloatingActionButton>
         <WorkoutForm />
       </FloatingActionButton>
