@@ -1,13 +1,8 @@
 import { getUserWorkouts } from "@/data/workouts";
 import { WorkoutItem } from "./WorkoutItem";
 
-export const WorkoutsList = async ({
-  searchParams,
-}: {
-  searchParams: Promise<{ year: string }>;
-}) => {
-  const params = await searchParams;
-  const workouts = await getUserWorkouts({ year: parseInt(params.year) });
+export const WorkoutsList = async ({ year }: { year: string }) => {
+  const workouts = await getUserWorkouts({ year: parseInt(year) });
 
   if (!workouts) {
     return <>Unavailable</>;

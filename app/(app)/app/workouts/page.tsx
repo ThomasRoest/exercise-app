@@ -74,7 +74,7 @@ const Workouts = async ({
           </div>
         }
       >
-        <WorkoutsList searchParams={searchParams} />
+        <WorkoutsList year={params.year ?? currentYear} />
       </Suspense>
       <FloatingActionButton>
         <WorkoutForm />
