@@ -7,7 +7,7 @@ import Link from "next/link";
 import { WorkoutForm } from "./new/WorkoutForm";
 import { WorkoutsList } from "./components/WorkoutsList";
 import { Suspense } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { LoadingSpinner } from "@/components/LoadingSpinner";
 
 const currentYear = new Date().getFullYear();
 
@@ -60,20 +60,7 @@ const Workouts = async ({
         })}
       </div>
       <Suspense
-        fallback={
-          <div className="space-x-4 light:bg-white p-4 rounded-md">
-            <div className="space-y-2">
-              <Skeleton className="h-10 w-[100%]" />
-              <Skeleton className="h-10 w-[100%]" />
-              <Skeleton className="h-10 w-[100%]" />
-              <Skeleton className="h-10 w-[100%]" />
-              <Skeleton className="h-10 w-[100%]" />
-              <Skeleton className="h-10 w-[100%]" />
-              <Skeleton className="h-10 w-[100%]" />
-            </div>
-          </div>
-        }
-      >
+        fallback={<LoadingSpinner />}>
         <WorkoutsList year={params.year ?? currentYear} />
       </Suspense>
       <FloatingActionButton>
