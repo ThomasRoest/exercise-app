@@ -8,6 +8,7 @@ import { WorkoutForm } from "./new/WorkoutForm";
 import { WorkoutsList } from "./components/WorkoutsList";
 import { Suspense } from "react";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { getWorkoutCount } from "@/data/workouts";
 
 const currentYear = new Date().getFullYear();
 
@@ -18,11 +19,29 @@ const Workouts = async ({
 }) => {
   const params = await searchParams;
 
-  const years = [
-    { id: currentYear, defaultActive: true },
-    { id: currentYear - 1, defaultActive: false },
-    { id: currentYear - 2, defaultActive: false },
-  ];
+  const years = await Promise.all([
+    getWorkoutCount({ year: currentYear }).then((count) => {
+      return {
+        id: currentYear,
+        defaultActive: true,
+        count: count,
+      };
+    }),
+    getWorkoutCount({ year: currentYear - 1 }).then((count) => {
+      return {
+        id: currentYear - 1,
+        defaultActive: false,
+        count: count,
+      };
+    }),
+    getWorkoutCount({ year: currentYear - 2 }).then((count) => {
+      return {
+        id: currentYear - 2,
+        defaultActive: false,
+        count: count,
+      };
+    }),
+  ]);
 
   return (
     <PageContainer>
@@ -53,14 +72,13 @@ const Workouts = async ({
                   query: { year: year.id },
                 }}
               >
-                {year.id}
+                {year.id} ({year.count})
               </Link>
             </Button>
           );
         })}
       </div>
-      <Suspense
-        fallback={<LoadingSpinner />}>
+      <Suspense fallback={<LoadingSpinner />}>
         <WorkoutsList year={params.year ?? currentYear} />
       </Suspense>
       <FloatingActionButton>
