@@ -5,12 +5,11 @@ import { InputGroup } from "@/components/InputGroup";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toastOptions } from "@/lib/utils";
 import { Exercise } from "@prisma/client";
 import { useRef, useState } from "react";
-import toast from "react-hot-toast";
 import { ExerciseSelect } from "./ExerciseSelect";
 import { FormHeader } from "@/components/FormHeader";
+import { useToast } from "@/lib/useToast";
 
 const getInitialState = (exercises: Exercise[]): Exercise | null => {
   try {
@@ -37,6 +36,7 @@ interface Props {
 
 export const WorkoutSetForm = ({ workoutId, exercises, onSuccess }: Props) => {
   const formRef = useRef<HTMLFormElement | null>(null);
+  const toast = useToast();
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(
     () => {
       return getInitialState(exercises);
@@ -57,10 +57,10 @@ export const WorkoutSetForm = ({ workoutId, exercises, onSuccess }: Props) => {
         };
         const result = await createSet(data);
         if (!result.success) {
-          toast.error(result.message, toastOptions);
+          toast.error(result.message);
           return;
         }
-        toast.success(result.message, toastOptions);
+        toast.success(result.message);
         formRef.current?.reset()
         if (onSuccess) {
           onSuccess();

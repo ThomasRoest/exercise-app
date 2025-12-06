@@ -2,21 +2,21 @@
 
 import { deleteExercise } from "@/actions/exercises/delete";
 import { DeleteButtonWithConfirm } from "@/components/DeleteWithConfirm";
-import { toastOptions } from "@/lib/utils";
+import { useToast } from "@/lib/useToast";
 import { useCallback, useTransition } from "react";
-import toast from "react-hot-toast";
 
 export const DeleteExercise = ({ exercise }: { exercise: { id: string, userId: string} }) => {
   const [isPending, startTransition] = useTransition();
-
+  const toast = useToast();
+  
   const deleteFn = useCallback(async () => {
     startTransition(async () => {
       const result = await deleteExercise(exercise);
       if (result.success) {
-        toast.success("Deleted", toastOptions);
+        toast.success("Deleted");
       }
     });
-  }, [exercise]);
+  }, [exercise, toast]);
 
   return (
     <DeleteButtonWithConfirm handleClick={deleteFn} isPending={isPending} />

@@ -4,11 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { toastOptions } from "@/lib/utils";
+import { useToast } from "@/lib/useToast";
 import { Program } from "@prisma/client";
 import { Loader2, Save, X } from "lucide-react";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
-import toast from "react-hot-toast";
 
 export const EditNoteForm = ({ note }: { note: Program }) => {
   const initial = note;
@@ -19,7 +18,8 @@ export const EditNoteForm = ({ note }: { note: Program }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
-
+  const toast = useToast();
+  
   const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsEditing(true);
     setTitle(event.target.value);
@@ -46,12 +46,12 @@ export const EditNoteForm = ({ note }: { note: Program }) => {
       userId: note.userId,
     });
     if (!result.success) {
-      toast.error(result.message, toastOptions);
+      toast.error(result.message);
 
       setIsPending(false);
       return;
     }
-    toast.success(result.message, toastOptions);
+    toast.success(result.message);
     setIsEditing(false);
     setIsPending(false);
   };

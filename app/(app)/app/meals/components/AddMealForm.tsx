@@ -2,28 +2,28 @@
 import { createMeal } from "@/actions/meals/create";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Input } from "@/components/ui/input";
-import { toastOptions } from "@/lib/utils";
+import { useToast } from "@/lib/useToast";
 import { PlusCircle } from "lucide-react";
 import { useEffect, useRef, useActionState } from "react";
-import toast from "react-hot-toast";
 
 export const AddMealForm = () => {
   const ref = useRef<HTMLFormElement | null>(null);
+  const toast = useToast();
   const [state, createAction] = useActionState(createMeal, {
     success: false,
   });
 
   useEffect(() => {
     if (state.success) {
-      toast.success("Added", toastOptions);
+      toast.success("Added");
       if (ref.current) {
         ref.current.reset();
       }
     }
     if (state.error) {
-      toast.error(state.error, toastOptions);
+      toast.error(state.error);
     }
-  }, [state, state.error, state.success, state.timestamp]);
+  }, [state, state.error, state.success, state.timestamp, toast]);
 
   return (
     <form action={createAction} ref={ref}>

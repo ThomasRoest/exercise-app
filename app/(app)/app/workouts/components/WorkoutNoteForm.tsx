@@ -5,9 +5,8 @@ import { FormHeader } from "@/components/FormHeader";
 import { InputGroup } from "@/components/InputGroup";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Textarea } from "@/components/ui/textarea";
-import { toastOptions } from "@/lib/utils";
+import { useToast } from "@/lib/useToast";
 import { useRef } from "react";
-import toast from "react-hot-toast";
 
 export const WorkoutNoteForm = ({
   onSuccess,
@@ -19,6 +18,7 @@ export const WorkoutNoteForm = ({
   note: string | null;
 }) => {
   const formRef = useRef<HTMLFormElement | null>(null);
+  const toast = useToast();
   return (
     <Form
       formRef={formRef}
@@ -28,10 +28,10 @@ export const WorkoutNoteForm = ({
           note: formData.get("note"),
         });
         if (!result.success) {
-          toast.error(result.message, toastOptions);
+          toast.error(result.message);
           return;
         }
-        toast.success(result.message, toastOptions);
+        toast.success(result.message);
         formRef.current?.reset();
         if (onSuccess) {
           onSuccess();

@@ -1,5 +1,4 @@
 import { type ClassValue, clsx } from "clsx";
-import { ToastOptions } from "react-hot-toast";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -27,15 +26,6 @@ export const sleep = (time = 1000) => {
   return new Promise((resolve) => {
     setTimeout(resolve, time);
   });
-};
-
-export const toastOptions: ToastOptions = {
-  duration: 3000,
-  position: "top-center",
-  style: {
-    backgroundColor: "gray",
-    color: "white",
-  },
 };
 
 export const dateFormatter = new Intl.DateTimeFormat("nl-NL", {

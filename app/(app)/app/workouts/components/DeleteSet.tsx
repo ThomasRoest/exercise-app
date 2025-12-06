@@ -10,25 +10,25 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { toastOptions } from "@/lib/utils";
+import { useToast } from "@/lib/useToast";
 import { Set } from "@prisma/client";
 import { Loader2, MoreHorizontal, Trash } from "lucide-react";
 import { useCallback, useState, useTransition } from "react";
-import toast from "react-hot-toast";
 
 export const DeleteSet = ({ set }: { set: Set }) => {
   const [open, setIsOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
-
+  const toast = useToast();
+  
   const onDelete = useCallback(() => {
     startTransition(async () => {
       const result = await deleteSet(set);
       if (result.success) {
-        toast.success("Deleted", toastOptions);
+        toast.success("Deleted");
         setIsOpen(false);
       }
     });
-  }, [set]);
+  }, [set, toast]);
 
   return (
     <DropdownMenu onOpenChange={setIsOpen} open={open}>

@@ -7,12 +7,12 @@ import { SubmitButton } from "@/components/SubmitButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { toastOptions } from "@/lib/utils";
+import { useToast } from "@/lib/useToast";
 import { useRef } from "react";
-import toast from "react-hot-toast";
 
 export const NewNoteForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   const formRef = useRef<HTMLFormElement | null>(null);
+  const toast = useToast();
   return (
     <Form
       formRef={formRef}
@@ -22,10 +22,10 @@ export const NewNoteForm = ({ onSuccess }: { onSuccess?: () => void }) => {
           description: formData.get("description"),
         });
         if (!result.success) {
-          toast.error(result.message, toastOptions);
+          toast.error(result.message);
           return;
         }
-        toast.success(result.message, toastOptions);
+        toast.success(result.message);
         formRef.current?.reset();
         if (onSuccess) {
           onSuccess();

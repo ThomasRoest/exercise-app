@@ -1,9 +1,9 @@
 "use client";
 
 import { createHabitEntry } from "@/actions/habitentries/create";
-import toast from "react-hot-toast";
 import { Calendar } from "./Calendar";
 import { deleteHabitEntry } from "@/actions/habitentries/delete";
+import { useToast } from "@/lib/useToast";
 
 interface HabitCalendarProps {
   habit: {
@@ -14,6 +14,7 @@ interface HabitCalendarProps {
 }
 
 export const HabitCalendar = ({ habit }: HabitCalendarProps) => {
+  const toast = useToast();
   const completeDate = async (date: string) => {
     const result = await createHabitEntry({
       date,

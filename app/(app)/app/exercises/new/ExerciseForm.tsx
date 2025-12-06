@@ -5,20 +5,21 @@ import { FormHeader } from "@/components/FormHeader";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toastOptions } from "@/lib/utils";
-import toast from "react-hot-toast";
+import { useToast } from "@/lib/useToast";
 
 export const ExerciseForm = ({ onSuccess }: { onSuccess?: () => void }) => {
+  const toast = useToast();
+  
   return (
     <>
       <Form
         action={async (formData) => {
           const result = await createExercise({ title: formData.get("title") });
           if (!result.success) {
-            toast.error(result.message, toastOptions);
+            toast.error(result.message);
             return;
           }
-          toast.success(result.message, toastOptions);
+          toast.success(result.message);
           if (onSuccess) {
             onSuccess();
           }

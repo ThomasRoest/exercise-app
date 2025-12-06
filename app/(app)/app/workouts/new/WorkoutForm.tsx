@@ -12,14 +12,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { toastOptions } from "@/lib/utils";
+import { useToast } from "@/lib/useToast";
 import { useState } from "react";
-import toast from "react-hot-toast";
 
 export const WorkoutForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   const [selectedOption, setSelectedOption] = useState<string>("Gym");
   const [showCustomInput, setShowCustomInput] = useState<boolean>(false);
-
+  const toast = useToast();
+  
   return (
     <Form
       action={async (formData): Promise<void> => {
@@ -27,8 +27,10 @@ export const WorkoutForm = ({ onSuccess }: { onSuccess?: () => void }) => {
           description: formData.get("description"),
         };
         const result = await createWorkout(data);
-        if (!result.success) {
-          toast.error(result.message, toastOptions);
+        if (result.success) {
+          toast.success(result.message);
+        } else {
+          toast.error(result.message);
         }
         if (onSuccess) {
           onSuccess();
