@@ -15,6 +15,12 @@ import {
 import { useToast } from "@/lib/useToast";
 import { useState } from "react";
 
+const workoutTypes = [
+  { label: "Gym", value: "Gym" },
+  { label: "Skate", value: "Skate" },
+  { label: "Walk", value: "Walk" },
+];
+
 export const WorkoutForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   const [selectedOption, setSelectedOption] = useState<string>("Gym");
   const [showCustomInput, setShowCustomInput] = useState<boolean>(false);
@@ -60,8 +66,11 @@ export const WorkoutForm = ({ onSuccess }: { onSuccess?: () => void }) => {
               <SelectValue placeholder="Select workout type..." />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="Gym">Gym</SelectItem>
-              <SelectItem value="Walk">Walk</SelectItem>
+              {workoutTypes.map((type) => (
+                <SelectItem key={type.value} value={type.value}>
+                  {type.label}
+                </SelectItem>
+              ))}
               <SelectItem value="custom">Custom...</SelectItem>
             </SelectContent>
           </Select>

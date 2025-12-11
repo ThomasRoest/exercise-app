@@ -14,6 +14,7 @@ const getEndOfYear = (year: number) => {
 const yearSchema = z.number().optional();
 interface FilterOptions {
   year?: number;
+  description?: string;
 }
 
 export const getUserWorkouts = async (opts: FilterOptions = {}) => {
