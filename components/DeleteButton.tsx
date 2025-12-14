@@ -16,8 +16,7 @@ export const DeleteButton = ({
       onClick={onClick}
       variant="outline"
     >
-      {isPending && <Loader2 className="animate-spin" />}
-      <Trash2 />
+      {isPending ? <Loader2 className="animate-spin" /> : <Trash2 />}
     </Button>
   );
 };

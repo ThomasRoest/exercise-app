@@ -59,6 +59,7 @@ model User {
   exercises     Exercise[]
   habits        Habit[]
   habitEntries  HabitEntry[]
+  weightEntries WeightEntry[]
 
   @@map("users")
 }
@@ -72,6 +73,18 @@ model Meal {
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("meals")
+}
+
+model WeightEntry {
+  id          String   @id @default(cuid())
+  weight      Decimal  @db.Decimal(5, 2)
+  unit        String   @default("kg")
+  note        String?
+  createdAt   DateTime @default(now())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("weight_entries")
 }
 
 model Workout {
