@@ -26,7 +26,7 @@ const Page = async () => {
         <ul className="space-y-2">
           {weightEntries.map((weightEntry) => {
             return (
-              <li key={weightEntry.id} className="p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow duration-200 dark:bg-gray-800">
+              <li key={weightEntry.id} className="px-4 py-2 bg-white rounded-lg shadow hover:shadow-md transition-shadow duration-200 dark:bg-gray-800">
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col">
                     <span className=" text-gray-800 dark:text-gray-200">
