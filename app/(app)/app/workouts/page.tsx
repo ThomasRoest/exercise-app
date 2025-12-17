@@ -1,14 +1,13 @@
 import { FloatingActionButton } from "@/components/FloatingActionButton";
 import { IconWorkout } from "@/components/icons/IconWorkout";
+import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { PageContainer } from "@/components/PageContainer";
 import { PageHeader } from "@/components/PageHeader";
-import { Button, ButtonProps } from "@/components/ui/button";
-import Link from "next/link";
-import { WorkoutForm } from "./new/WorkoutForm";
-import { WorkoutsList } from "./components/WorkoutsList";
-import { Suspense } from "react";
-import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { getWorkoutCount } from "@/data/workouts";
+import { Suspense } from "react";
+import { WorkoutsFilter } from "./components/WorkoutsFilter";
+import { WorkoutsList } from "./components/WorkoutsList";
+import { WorkoutForm } from "./new/WorkoutForm";
 
 const currentYear = new Date().getFullYear();
 
@@ -49,35 +48,7 @@ const Workouts = async ({
         <IconWorkout />
         <h1 className="font-bold dark:text-gray-200">Workouts</h1>
       </PageHeader>
-      <div className="mb-2">
-        {years.map((year) => {
-          let variant: ButtonProps["variant"] = "outline";
-          if (!params.year) {
-            variant = year.defaultActive ? "default" : "outline";
-          } else {
-            variant =
-              year.id.toString() === params.year ? "default" : "outline";
-          }
-          return (
-            <Button
-              key={year.id}
-              variant={variant}
-              size="sm"
-              className="mr-1"
-              asChild
-            >
-              <Link
-                href={{
-                  pathname: "/app/workouts",
-                  query: { year: year.id },
-                }}
-              >
-                {year.id} ({year.count})
-              </Link>
-            </Button>
-          );
-        })}
-      </div>
+      <WorkoutsFilter years={years} params={params} />
       <Suspense fallback={<LoadingSpinner />}>
         <WorkoutsList year={params.year ?? currentYear} />
       </Suspense>

@@ -13,13 +13,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/lib/useToast";
+import { workoutTypes } from "@/lib/workout-types";
 import { useState } from "react";
-
-const workoutTypes = [
-  { label: "Gym", value: "Gym" },
-  { label: "Skate", value: "Skate" },
-  { label: "Walk", value: "Walk" },
-];
 
 export const WorkoutForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   const [selectedOption, setSelectedOption] = useState<string>("Gym");
