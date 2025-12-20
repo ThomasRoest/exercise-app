@@ -48,7 +48,7 @@ const Workouts = async ({
         <IconWorkout />
         <h1 className="font-bold dark:text-gray-200">Workouts</h1>
       </PageHeader>
-      <WorkoutsFilter years={years} params={params} />
+      <WorkoutsFilter years={years} />
       <Suspense fallback={<LoadingSpinner />}>
         <WorkoutsList year={params.year ?? currentYear} />
       </Suspense>

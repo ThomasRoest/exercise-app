@@ -2,26 +2,37 @@
 
 import { Button, ButtonProps } from "@/components/ui/button";
 import { workoutTypes } from "@/lib/workout-types";
-import Link from "next/link";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 interface Props {
   years: { id: number; defaultActive: boolean; count: number | null }[];
-  params: {
-    year: string;
-  }
 }
 
-export const WorkoutsFilter = ({ years, params }: Props) => {
+export const WorkoutsFilter = ({ years }: Props) => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const setParams = (key: string, value: string | null) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value === null) {
+      params.delete(key);
+    } else {
+      params.set(key, value);
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+
   return (
     <div className="mb-2 flex flex-col gap-2">
       <div>
         {years.map((year) => {
           let variant: ButtonProps["variant"] = "outline";
-          if (!params.year) {
-            variant = year.defaultActive ? "default" : "outline";
-          } else {
-            variant = year.id.toString() === params.year ? "default" : "outline";
-          }
+          // if (!params.year) {
+          //   variant = year.defaultActive ? "default" : "outline";
+          // } else {
+          //   variant = year.id.toString() === params.year ? "default" : "outline";
+          // }
           return (
             <Button
               key={year.id}
@@ -29,21 +40,24 @@ export const WorkoutsFilter = ({ years, params }: Props) => {
               size="sm"
               className="mr-1"
               asChild
+              onClick={() => setParams("year", year.id.toString())}
             >
-              <Link
-                href={{
-                  pathname: "/app/workouts",
-                  query: { year: year.id },
-                }}
-              >
+              <div>
                 {year.id} ({year.count})
-              </Link>
+              </div>
             </Button>
           );
         })}
       </div>
       <div className="flex gap-2">
-        <Button variant="outline" size="sm" className="rounded-full text-xs">All</Button>
+        <Button
+          variant="outline"
+          size="sm"
+          className="rounded-full text-xs"
+          onClick={() => setParams("type", null)}
+        >
+          All
+        </Button>
         {workoutTypes.map((workoutType) => {
           return (
             <Button
@@ -51,6 +65,9 @@ export const WorkoutsFilter = ({ years, params }: Props) => {
               variant="outline"
               size="sm"
               className="rounded-full text-xs"
+              onClick={() =>
+                setParams("type", workoutType.value.toLocaleLowerCase())
+              }
               // className={cn(
               //   workoutType.bg,
               //   workoutType.text,
