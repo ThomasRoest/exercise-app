@@ -59,7 +59,7 @@ export const WorkoutsFilter = ({ years }: Props) => {
           All
         </Button>
         {workoutTypes.map((workoutType) => {
-          const isActive = currentType === workoutType.value.toLowerCase();
+          const isActive = currentType === workoutType.value
           return (
             <Button
               key={workoutType.value}
@@ -67,7 +67,7 @@ export const WorkoutsFilter = ({ years }: Props) => {
               size="sm"
               className="rounded-full text-xs"
               onClick={() =>
-                setParams("type", workoutType.value.toLowerCase())
+                setParams("type", workoutType.value)
               }
             >
               <span className="flex items-center gap-2">
