@@ -13,6 +13,9 @@ export const WorkoutsFilter = ({ years }: Props) => {
   const pathname = usePathname();
   const { replace } = useRouter();
 
+  const currentYear = searchParams.get("year");
+  const currentType = searchParams.get("type");
+
   const setParams = (key: string, value: string | null) => {
     const params = new URLSearchParams(searchParams.toString());
     if (value === null) {
@@ -27,19 +30,16 @@ export const WorkoutsFilter = ({ years }: Props) => {
     <div className="mb-2 flex flex-col gap-2">
       <div>
         {years.map((year) => {
-          let variant: ButtonProps["variant"] = "outline";
-          // if (!params.year) {
-          //   variant = year.defaultActive ? "default" : "outline";
-          // } else {
-          //   variant = year.id.toString() === params.year ? "default" : "outline";
-          // }
+          const isActive = currentYear
+            ? year.id.toString() === currentYear
+            : year.defaultActive;
+          const variant: ButtonProps["variant"] = isActive ? "default" : "outline";
           return (
             <Button
               key={year.id}
               variant={variant}
               size="sm"
               className="mr-1"
-              asChild
               onClick={() => setParams("year", year.id.toString())}
             >
               <div>
@@ -51,7 +51,7 @@ export const WorkoutsFilter = ({ years }: Props) => {
       </div>
       <div className="flex gap-2">
         <Button
-          variant="outline"
+          variant={currentType === null ? "default" : "outline"}
           size="sm"
           className="rounded-full text-xs"
           onClick={() => setParams("type", null)}
@@ -59,21 +59,16 @@ export const WorkoutsFilter = ({ years }: Props) => {
           All
         </Button>
         {workoutTypes.map((workoutType) => {
+          const isActive = currentType === workoutType.value.toLowerCase();
           return (
             <Button
               key={workoutType.value}
-              variant="outline"
+              variant={isActive ? "default" : "outline"}
               size="sm"
               className="rounded-full text-xs"
               onClick={() =>
-                setParams("type", workoutType.value.toLocaleLowerCase())
+                setParams("type", workoutType.value.toLowerCase())
               }
-              // className={cn(
-              //   workoutType.bg,
-              //   workoutType.text,
-              //   workoutType.border,
-              //   "rounded-full"
-              // )}
             >
               <span className="flex items-center gap-2">
                 {workoutType.icon}
