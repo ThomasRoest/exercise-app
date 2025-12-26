@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const createExercises = async (userId: string) => {
-  await prisma.exercise.createMany({
+  const result = await prisma.exercise.createMany({
     data: [
       {
         title: "Overhead press",
@@ -37,6 +37,7 @@ const createExercises = async (userId: string) => {
       },
     ],
   });
+  return result.count;
 };
 
 const createWorkouts = async (userId: string) => {
@@ -55,7 +56,10 @@ const createWorkouts = async (userId: string) => {
     { exerciseTitle: "deadlift", reps: 5, weight: 40, userId },
   ];
 
-  for (let i = 0; i < 5; i++) {
+  const workoutCount = 5;
+  const setsPerWorkout = sets.length;
+
+  for (let i = 0; i < workoutCount; i++) {
     await prisma.workout.create({
       data: {
         description: "gym",
@@ -67,6 +71,11 @@ const createWorkouts = async (userId: string) => {
       },
     });
   }
+
+  return {
+    workouts: workoutCount,
+    sets: workoutCount * setsPerWorkout,
+  };
 };
 
 async function main() {
@@ -77,8 +86,13 @@ async function main() {
   }
 
   console.log("run seed...");
-  await createExercises(userId);
-  await createWorkouts(userId);
+  const exercisesCount = await createExercises(userId);
+  const { workouts: workoutsCount, sets: setsCount } = await createWorkouts(userId);
+
+  console.log(`\n✅ Seed completed:`);
+  console.log(`   - ${exercisesCount} exercises created`);
+  console.log(`   - ${workoutsCount} workouts created`);
+  console.log(`   - ${setsCount} sets created`);
 }
 
 main()
