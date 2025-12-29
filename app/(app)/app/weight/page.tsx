@@ -1,10 +1,11 @@
+import { FloatingActionButton } from "@/components/FloatingActionButton";
 import { IconWeight } from "@/components/icons/IconWeight";
 import { PageContainer } from "@/components/PageContainer";
 import { PageHeader } from "@/components/PageHeader";
-import { AddWeightEntryForm } from "./components/AddWeightEntryForm";
-import { DeleteWeightEntry } from "./components/DeleteWeightEntry";
 import { getUserWeightEntries } from "@/data/weightentries";
 import { dateFormatter } from "@/lib/utils";
+import { AddWeightEntryForm } from "./components/AddWeightEntryForm";
+import { DeleteWeightEntry } from "./components/DeleteWeightEntry";
 
 const Page = async () => {
   const weightEntries = await getUserWeightEntries();
@@ -20,20 +21,19 @@ const Page = async () => {
         </h1>
       </PageHeader>
       <div>
-        <div className="mb-4">
-        <AddWeightEntryForm />
-        </div>
         <ul className="space-y-2">
           {weightEntries.map((weightEntry) => {
             return (
-              <li key={weightEntry.id} className="px-4 py-2 bg-white rounded-lg shadow hover:shadow-md transition-shadow duration-200 dark:bg-gray-800">
+              <li
+                key={weightEntry.id}
+                className="px-4 py-2 bg-white rounded-lg shadow hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
+              >
                 <div className="flex items-center justify-between">
-                  <div className="flex flex-col">
-                    <span className=" text-gray-800 dark:text-gray-200">
-                      {String(weightEntry.weight)} {weightEntry.unit}
-                    </span>
+                  <div className="flex text-sm gap-x-1">
+                    <span>{String(weightEntry.weight)} </span>
+                    <span className="text-gray-400">{weightEntry.unit}</span>
                     {weightEntry.note && (
-                      <span className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                      <span className="text-gray-500 dark:text-gray-400 mt-1">
                         {weightEntry.note}
                       </span>
                     )}
@@ -42,7 +42,12 @@ const Page = async () => {
                     <span className="text-sm text-gray-400 dark:text-gray-500">
                       {dateFormatter.format(weightEntry.createdAt)}
                     </span>
-                    <DeleteWeightEntry weightEntry={{ id: weightEntry.id, userId: weightEntry.userId }} />
+                    <DeleteWeightEntry
+                      weightEntry={{
+                        id: weightEntry.id,
+                        userId: weightEntry.userId,
+                      }}
+                    />
                   </div>
                 </div>
               </li>
@@ -50,6 +55,9 @@ const Page = async () => {
           })}
         </ul>
       </div>
+      <FloatingActionButton>
+        <AddWeightEntryForm />
+      </FloatingActionButton>
     </PageContainer>
   );
 };
