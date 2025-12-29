@@ -14,7 +14,7 @@ const currentYear = new Date().getFullYear();
 const Workouts = async ({
   searchParams,
 }: {
-  searchParams: Promise<{ year: string }>;
+  searchParams: Promise<{ year: string, type: string }>;
 }) => {
   const params = await searchParams;
 
@@ -50,7 +50,7 @@ const Workouts = async ({
       </PageHeader>
       <WorkoutsFilter years={years} />
       <Suspense fallback={<LoadingSpinner />}>
-        <WorkoutsList year={params.year ?? currentYear} />
+        <WorkoutsList year={params.year ?? currentYear} type={params.type} />
       </Suspense>
       <FloatingActionButton>
         <WorkoutForm />

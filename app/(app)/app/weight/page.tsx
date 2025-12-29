@@ -30,7 +30,7 @@ const Page = async () => {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex text-sm gap-x-1">
-                    <span>{String(weightEntry.weight)} </span>
+                    <span className="dark:text-gray-300">{String(weightEntry.weight)} </span>
                     <span className="text-gray-400">{weightEntry.unit}</span>
                     {weightEntry.note && (
                       <span className="text-gray-500 dark:text-gray-400 mt-1">

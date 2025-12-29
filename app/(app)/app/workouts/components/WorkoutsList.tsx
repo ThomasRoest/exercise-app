@@ -1,8 +1,13 @@
 import { getUserWorkouts } from "@/data/workouts";
 import { WorkoutItem } from "./WorkoutItem";
 
-export const WorkoutsList = async ({ year }: { year: string }) => {
-  const workouts = await getUserWorkouts({ year: parseInt(year) });
+interface ListProps {
+  year: string;
+  type: string;
+}
+
+export const WorkoutsList = async ({ year, type }: ListProps) => {
+  const workouts = await getUserWorkouts({ year: parseInt(year), type });
 
   if (!workouts) {
     return <>Unavailable</>;

@@ -62,7 +62,7 @@ const createWorkouts = async (userId: string) => {
   for (let i = 0; i < workoutCount; i++) {
     await prisma.workout.create({
       data: {
-        description: "gym",
+        description: "Gym",
         userId,
         note: i % 2 === 0 ? "Some note" : void 0,
         sets: {

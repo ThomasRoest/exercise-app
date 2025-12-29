@@ -15,6 +15,7 @@ const yearSchema = z.number().optional();
 interface FilterOptions {
   year?: number;
   description?: string;
+  type?: string;
 }
 
 export const getUserWorkouts = async (opts: FilterOptions = {}) => {
@@ -32,6 +33,10 @@ export const getUserWorkouts = async (opts: FilterOptions = {}) => {
       gte: getStartOfYear(opts.year),
       lt: getEndOfYear(opts.year),
     };
+  }
+
+  if (opts.type) {
+    where.description = opts.type
   }
 
   return await prisma.workout.findMany({
