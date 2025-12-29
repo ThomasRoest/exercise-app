@@ -18,7 +18,7 @@ const PagesLayout = async ({ children }: { children: ReactNode }) => {
           About
         </Link>
       </header>
-      <div className="flex-1 p-5">{children}</div>
+      <div className="flex-1 flex flex-col p-5">{children}</div>
       <footer className="bg-gray-200 dark:bg-gray-800 p-5 text-gray-700 dark:text-gray-300">
         {date.getFullYear()}
       </footer>
