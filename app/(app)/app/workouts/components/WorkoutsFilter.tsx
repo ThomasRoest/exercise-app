@@ -1,5 +1,6 @@
 "use client";
 
+import { useOptimistic, useTransition } from "react";
 import { Button, ButtonProps } from "@/components/ui/button";
 import { workoutTypes } from "@/lib/workout-types";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
@@ -12,26 +13,43 @@ export const WorkoutsFilter = ({ years }: Props) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
+  const [, startTransition] = useTransition();
 
-  const currentYear = searchParams.get("year");
-  const currentType = searchParams.get("type");
+  const [optimisticYear, setOptimisticYear] = useOptimistic(
+    searchParams.get("year")
+  );
+  const [optimisticType, setOptimisticType] = useOptimistic(
+    searchParams.get("type")
+  );
 
-  const setParams = (key: string, value: string | null) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (value === null) {
-      params.delete(key);
-    } else {
-      params.set(key, value);
-    }
-    replace(`${pathname}?${params.toString()}`);
+  const setYear = (value: string) => {
+    startTransition(() => {
+      setOptimisticYear(value);
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("year", value);
+      replace(`${pathname}?${params.toString()}`);
+    });
+  };
+
+  const setType = (value: string | null) => {
+    startTransition(() => {
+      setOptimisticType(value);
+      const params = new URLSearchParams(searchParams.toString());
+      if (value === null) {
+        params.delete("type");
+      } else {
+        params.set("type", value);
+      }
+      replace(`${pathname}?${params.toString()}`);
+    });
   };
 
   return (
     <div className="mb-2 flex flex-col gap-2">
       <div>
         {years.map((year) => {
-          const isActive = currentYear
-            ? year.id.toString() === currentYear
+          const isActive = optimisticYear
+            ? year.id.toString() === optimisticYear
             : year.defaultActive;
           const variant: ButtonProps["variant"] = isActive ? "default" : "outline";
           return (
@@ -40,7 +58,7 @@ export const WorkoutsFilter = ({ years }: Props) => {
               variant={variant}
               size="sm"
               className="mr-1"
-              onClick={() => setParams("year", year.id.toString())}
+              onClick={() => setYear(year.id.toString())}
             >
               <div>
                 {year.id} ({year.count})
@@ -51,24 +69,22 @@ export const WorkoutsFilter = ({ years }: Props) => {
       </div>
       <div className="flex gap-2">
         <Button
-          variant={currentType === null ? "default" : "outline"}
+          variant={optimisticType === null ? "default" : "outline"}
           size="sm"
           className="rounded-full text-xs"
-          onClick={() => setParams("type", null)}
+          onClick={() => setType(null)}
         >
           All
         </Button>
         {workoutTypes.map((workoutType) => {
-          const isActive = currentType === workoutType.value
+          const isActive = optimisticType === workoutType.value;
           return (
             <Button
               key={workoutType.value}
               variant={isActive ? "default" : "outline"}
               size="sm"
               className="rounded-full text-xs"
-              onClick={() =>
-                setParams("type", workoutType.value)
-              }
+              onClick={() => setType(workoutType.value)}
             >
               <span className="flex items-center gap-2">
                 {workoutType.icon}
