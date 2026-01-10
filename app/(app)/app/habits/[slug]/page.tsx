@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import { DeleteHabit } from "../components/DeleteHabit";
 import { HabitCalendar } from "../components/HabitCalendar";
 
-const MyHabitPage = async ({
+const HabitDetailPage = async ({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -44,4 +44,4 @@ const MyHabitPage = async ({
   );
 };
 
-export default MyHabitPage;
+export default HabitDetailPage;

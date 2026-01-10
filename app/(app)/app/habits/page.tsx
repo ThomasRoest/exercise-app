@@ -3,9 +3,8 @@ import { IconHabits } from "@/components/icons/IconHabits";
 import { PageContainer } from "@/components/PageContainer";
 import { PageHeader } from "@/components/PageHeader";
 import { getUserHabits } from "@/data/habits";
-import { ChevronRight } from "lucide-react";
-import Link from "next/link";
 import { HabitForm } from "./components/HabitForm";
+import { HabitListItem } from "./components/HabitListItem";
 
 const HabitsPage = async () => {
   const habits = await getUserHabits();
@@ -19,21 +18,9 @@ const HabitsPage = async () => {
       </PageHeader>
       <div className="flex flex-col gap-y-2">
         <ul className="space-y-2">
-          {habits?.map((habit) => {
-            return (
-              <li key={habit.id}>
-                <Link
-                  href={`/app/habits/${habit.slug}`}
-                  className="block w-full p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow duration-200 hover:bg-gray-50 dark:bg-gray-800"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-800 font-medium dark:text-gray-200">{habit.title}</span>
-                    <ChevronRight className="text-gray-400" /> 
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
+          {habits?.map((habit) => (
+            <HabitListItem key={habit.id} habit={habit} />
+          ))}
         </ul>
       </div>
       <FloatingActionButton>
