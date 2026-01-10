@@ -1,6 +1,6 @@
 import { IconExercise } from "./icons/IconExercise";
+import { IconHabits } from "./icons/IconHabits";
 import { IconHome } from "./icons/IconHome";
-import { IconNotes } from "./icons/IconNotes";
 import { IconWorkout } from "./icons/IconWorkout";
 import { MenuBarLink } from "./MenuBarLink";
 
@@ -14,7 +14,7 @@ const links = [
     label: "Home",
     icon: <IconHome />,
   },
-  { path: "/app/notes", label: "Notes", icon: <IconNotes /> },
+  { path: "/app/habits", label: "Habits", icon: <IconHabits /> },
   {
     path: "/app/exercises",
     label: "Exercises",
