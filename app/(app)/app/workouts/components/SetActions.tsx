@@ -15,7 +15,7 @@ import { Set } from "@prisma/client";
 import { Loader2, MoreHorizontal, Trash } from "lucide-react";
 import { useCallback, useState, useTransition } from "react";
 
-export const DeleteSet = ({ set }: { set: Set }) => {
+export const SetActions = ({ set }: { set: Set }) => {
   const [open, setIsOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const toast = useToast();

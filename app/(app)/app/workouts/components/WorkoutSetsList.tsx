@@ -1,5 +1,5 @@
 import { ListItem } from "@/components/ListItem";
-import { DeleteSet } from "./DeleteSet";
+import { SetActions } from "./SetActions";
 import { capitalize } from "@/lib/utils";
 import { Set } from "@prisma/client";
 import Link from "next/link";
@@ -35,7 +35,7 @@ export const WorkoutSetsList = ({ entries }: { entries: Set[] }) => {
             return (
               <ListItem key={entry.id}>
                 <span className="text-sm">{`${entry.reps} x ${entry.weight} kg`}</span>
-                <DeleteSet set={entry} />
+                <SetActions set={entry} />
               </ListItem>
             );
           })}
