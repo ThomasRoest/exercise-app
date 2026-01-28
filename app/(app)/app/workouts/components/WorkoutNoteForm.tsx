@@ -38,7 +38,7 @@ export const WorkoutNoteForm = ({
         }
       }}
     >
-      <FormHeader>Add note</FormHeader>
+      <FormHeader>Workout Note</FormHeader>
       <InputGroup>
         <Textarea
           placeholder="Add note."
@@ -48,7 +48,7 @@ export const WorkoutNoteForm = ({
           required
         />
       </InputGroup>
-      <SubmitButton>Create</SubmitButton>
+      <SubmitButton>Submit</SubmitButton>
     </Form>
   );
 };
