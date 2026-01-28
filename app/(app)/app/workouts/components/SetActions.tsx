@@ -1,5 +1,6 @@
 "use client";
 
+import { copySet } from "@/actions/sets/copy";
 import { deleteSet } from "@/actions/sets/delete";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,18 +9,22 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/lib/useToast";
 import { Set } from "@prisma/client";
-import { Loader2, MoreHorizontal, Trash } from "lucide-react";
+import { Copy, Loader2, MoreHorizontal, Trash } from "lucide-react";
 import { useCallback, useState, useTransition } from "react";
 
-export const SetActions = ({ set }: { set: Set }) => {
-  const [open, setIsOpen] = useState(false);
+const DeleteItem = ({
+  set,
+  setIsOpen,
+}: {
+  set: Set;
+  setIsOpen: (open: boolean) => void;
+}) => {
   const [isPending, startTransition] = useTransition();
   const toast = useToast();
-  
   const onDelete = useCallback(() => {
     startTransition(async () => {
       const result = await deleteSet(set);
@@ -28,7 +33,49 @@ export const SetActions = ({ set }: { set: Set }) => {
         setIsOpen(false);
       }
     });
-  }, [set, toast]);
+  }, [set, setIsOpen, toast]);
+
+  return (
+    <DropdownMenuItem onClick={onDelete}>
+      <Trash className="mr-2 h-4 w-4" />
+      Delete
+      {isPending && <Loader2 className="animate-spin" />}
+    </DropdownMenuItem>
+  );
+};
+
+const CopyItem = ({
+  set,
+  setIsOpen,
+}: {
+  set: Set;
+  setIsOpen: (open: boolean) => void;
+}) => {
+  const [isPending, startTransition] = useTransition();
+  const toast = useToast();
+  const copy = useCallback(() => {
+    startTransition(async () => {
+      const result = await copySet({...set});
+      if (result?.success) {
+        toast.success("Copied");
+        setIsOpen(false);
+      } else {
+        toast.error("Could not copy set");
+      }
+    });
+  }, [set, setIsOpen, toast]);
+
+  return (
+    <DropdownMenuItem onClick={copy}>
+      <Copy className="mr-2 h-4 w-4" />
+      Copy
+      {isPending && <Loader2 className="animate-spin" />}
+    </DropdownMenuItem>
+  );
+};
+
+export const SetActions = ({ set }: { set: Set }) => {
+  const [open, setIsOpen] = useState(false);
 
   return (
     <DropdownMenu onOpenChange={setIsOpen} open={open}>
@@ -40,12 +87,9 @@ export const SetActions = ({ set }: { set: Set }) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
+        <DeleteItem set={set} setIsOpen={setIsOpen} />
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={onDelete}>
-          <Trash className="mr-2 h-4 w-4" />
-          Delete
-          {isPending && <Loader2 className="animate-spin" />}
-        </DropdownMenuItem>
+        <CopyItem set={set} setIsOpen={setIsOpen} />
       </DropdownMenuContent>
     </DropdownMenu>
   );

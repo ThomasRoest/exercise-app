@@ -7,3 +7,9 @@ export const setSchema = z.object({
   weight: z.string().min(1, "Weight cannot be empty"),
   workoutId: z.string().min(1, "Missing workoutId"),
 });
+
+export const copySetSchema = setSchema.extend({
+  userId: z.string().min(1, "Missing userId"),
+  reps: z.number(),
+  weight: z.number(),
+});
