@@ -50,7 +50,7 @@ const WorkoutPage = async (props: { params: Promise<{ id: string }> }) => {
           </div>
         </>
       )}
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 pb-16">
         <WorkoutSetsList entries={workout.sets} />
       </div>
       <FloatingActionButton>
