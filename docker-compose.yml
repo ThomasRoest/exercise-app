@@ -1,6 +1,7 @@
 services:
   db:
     image: postgres:17.0
+    container_name: fit_app
     hostname: ${DB_HOST}
     ports:
       - "5432:${DB_PORT}"
