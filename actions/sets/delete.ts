@@ -3,7 +3,7 @@
 import prisma from "@/prisma/db";
 import { getCurrentUser } from "@/data/users";
 import { Set } from "@prisma/client";
-import { revalidateTag } from "next/cache";
+import { revalidateTag, updateTag } from "next/cache";
 import { z } from "zod";
 
 const schema = z.object({
@@ -38,7 +38,7 @@ export const deleteSet = async (set: Set) => {
         id: data.id,
       },
     });
-    revalidateTag("set");
+    updateTag("set")
     return {
       success: true,
       timestamp,
