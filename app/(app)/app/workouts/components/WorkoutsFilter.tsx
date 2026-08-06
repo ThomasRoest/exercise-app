@@ -2,7 +2,6 @@
 
 import { useOptimistic, useTransition } from "react";
 import { Button, ButtonProps } from "@/components/ui/button";
-import { workoutTypes } from "@/lib/workout-types";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 interface Props {
@@ -18,9 +17,6 @@ export const WorkoutsFilter = ({ years }: Props) => {
   const [optimisticYear, setOptimisticYear] = useOptimistic(
     searchParams.get("year")
   );
-  const [optimisticType, setOptimisticType] = useOptimistic(
-    searchParams.get("type")
-  );
 
   const setYear = (value: string) => {
     startTransition(() => {
@@ -31,18 +27,6 @@ export const WorkoutsFilter = ({ years }: Props) => {
     });
   };
 
-  const setType = (value: string | null) => {
-    startTransition(() => {
-      setOptimisticType(value);
-      const params = new URLSearchParams(searchParams.toString());
-      if (value === null) {
-        params.delete("type");
-      } else {
-        params.set("type", value);
-      }
-      replace(`${pathname}?${params.toString()}`);
-    });
-  };
 
   return (
     <div className="mb-2 flex flex-col gap-2">
@@ -63,33 +47,6 @@ export const WorkoutsFilter = ({ years }: Props) => {
               <div>
                 {year.id} ({year.count})
               </div>
-            </Button>
-          );
-        })}
-      </div>
-      <div className="flex gap-2">
-        <Button
-          variant={optimisticType === null ? "default" : "outline"}
-          size="sm"
-          className="rounded-full text-xs"
-          onClick={() => setType(null)}
-        >
-          All
-        </Button>
-        {workoutTypes.map((workoutType) => {
-          const isActive = optimisticType === workoutType.value;
-          return (
-            <Button
-              key={workoutType.value}
-              variant={isActive ? "default" : "outline"}
-              size="sm"
-              className="rounded-full text-xs"
-              onClick={() => setType(workoutType.value)}
-            >
-              <span className="flex items-center gap-2">
-                {workoutType.icon}
-                {workoutType.label}
-              </span>
             </Button>
           );
         })}
