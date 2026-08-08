@@ -1,4 +1,4 @@
-# Fit App
+# Workouts
 
 Fitness tracking application built with Next.js & Prisma
 

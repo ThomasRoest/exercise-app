@@ -24,7 +24,7 @@ export const Drawer = ({
   isOpen,
   children,
   position = "left",
-  title = "Fit app",
+  title = "Workouts",
   header = true,
 }: {
   close: () => void;

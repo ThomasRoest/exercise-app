@@ -6,8 +6,8 @@ import { HtmlRoot } from "@/components/HtmlRoot";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Fit app",
-  description: "fit app",
+  title: "Workouts",
+  description: "Workouts",
 };
 
 export default async function RootLayout({

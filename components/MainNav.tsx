@@ -67,7 +67,7 @@ export const MainNav = (): ReactElement<any> => {
             <SidebarOpen className="h-4 w-4" />
           </Button>
           <Link href="/" className="font-bold dark:text-gray-200">
-            Fit app
+            Workouts
           </Link>
           <Button
             asChild
