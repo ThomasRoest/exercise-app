@@ -40,11 +40,11 @@ const WorkoutPage = async (props: { params: Promise<{ id: string }> }) => {
       {workout.note && (
         <>
           <div className="mb-4 p-3 rounded-lg bg-gray-50 flex justify-between dark:bg-gray-800 dark:text-gray-400">
-            <div className="flex gap-x-3">
+            <div className="flex gap-x-3 items-center">
               <div className="mt-1">
                 <MessageSquareText className="text-slate-500 w-5 h-5" />
               </div>
-              <p className="whitespace-pre-wrap break-words text-sm text-gray-700 dark:text-gray-400">
+              <p className="whitespace-pre-wrap break-words text-sm text-gray-500 dark:text-gray-400">
                 {workout.note}
               </p>
             </div>

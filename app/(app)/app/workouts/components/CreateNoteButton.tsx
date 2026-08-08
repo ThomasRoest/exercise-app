@@ -30,10 +30,9 @@ export const CreateNoteButton = ({
         <Button
           variant="ghost"
           size="sm"
-          className="active:bg-slate-300 text-gray-700"
+          className="active:bg-slate-300 text-gray-500"
         >
-          <PencilIcon className="w-4 h-4 mr-2 text-gray-700" />
-          {note ? "Edit" : "Note"}
+          <PencilIcon className="w-4 h-4 mr-2 text-gray-500" />
         </Button>
       </DrawerTrigger>
       <DrawerContent>
