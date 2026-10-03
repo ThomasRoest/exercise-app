@@ -1,35 +1,29 @@
-"use client";
+'use client';
 
-import { copySet } from "@/actions/sets/copy";
-import { deleteSet } from "@/actions/sets/delete";
-import { Button } from "@/components/ui/button";
+import { copySet } from '@/actions/sets/copy';
+import { deleteSet } from '@/actions/sets/delete';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
-import { useToast } from "@/lib/useToast";
-import { Set } from "@prisma/client";
-import { Copy, Loader2, MoreHorizontal, Trash } from "lucide-react";
-import { useCallback, useState, useTransition } from "react";
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { useToast } from '@/lib/useToast';
+import { Set } from '@prisma/client';
+import { Copy, Loader2, MoreHorizontal, Trash } from 'lucide-react';
+import { useCallback, useState, useTransition } from 'react';
 
-const DeleteItem = ({
-  set,
-  setIsOpen,
-}: {
-  set: Set;
-  setIsOpen: (open: boolean) => void;
-}) => {
+const DeleteItem = ({ set, setIsOpen }: { set: Set; setIsOpen: (open: boolean) => void }) => {
   const [isPending, startTransition] = useTransition();
   const toast = useToast();
   const onDelete = useCallback(() => {
     startTransition(async () => {
       const result = await deleteSet(set);
       if (result.success) {
-        toast.success("Deleted");
+        toast.success('Deleted');
         setIsOpen(false);
       }
     });
@@ -44,26 +38,27 @@ const DeleteItem = ({
   );
 };
 
-const CopyItem = ({
-  set,
-  setIsOpen,
-}: {
-  set: Set;
-  setIsOpen: (open: boolean) => void;
-}) => {
+const useCopySet = (set: Set, onSuccess?: () => void) => {
   const [isPending, startTransition] = useTransition();
   const toast = useToast();
   const copy = useCallback(() => {
     startTransition(async () => {
-      const result = await copySet({...set});
+      const result = await copySet({ ...set });
       if (result?.success) {
-        toast.success("Copied");
-        setIsOpen(false);
+        toast.success('Copied');
+        onSuccess?.();
       } else {
-        toast.error("Could not copy set");
+        toast.error('Could not copy set');
       }
     });
-  }, [set, setIsOpen, toast]);
+  }, [set, onSuccess, toast]);
+
+  return { copy, isPending };
+};
+
+const CopyItem = ({ set, setIsOpen }: { set: Set; setIsOpen: (open: boolean) => void }) => {
+  const close = useCallback(() => setIsOpen(false), [setIsOpen]);
+  const { copy, isPending } = useCopySet(set, close);
 
   return (
     <DropdownMenuItem onClick={copy}>
@@ -74,23 +69,37 @@ const CopyItem = ({
   );
 };
 
+const CopyButton = ({ set }: { set: Set }) => {
+  const { copy, isPending } = useCopySet(set);
+
+  return (
+    <Button variant="ghost" className="h-8 w-8 p-0 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300" onClick={copy} disabled={isPending}>
+      <span className="sr-only">Copy set</span>
+      {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Copy className="h-4 w-4" />}
+    </Button>
+  );
+};
+
 export const SetActions = ({ set }: { set: Set }) => {
   const [open, setIsOpen] = useState(false);
 
   return (
-    <DropdownMenu onOpenChange={setIsOpen} open={open}>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="h-8 w-8 p-0">
-          <span className="sr-only">Open menu</span>
-          <MoreHorizontal className="h-4 w-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-        <DeleteItem set={set} setIsOpen={setIsOpen} />
-        <DropdownMenuSeparator />
-        <CopyItem set={set} setIsOpen={setIsOpen} />
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="flex items-center gap-1">
+      <CopyButton set={set} />
+      <DropdownMenu onOpenChange={setIsOpen} open={open}>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DeleteItem set={set} setIsOpen={setIsOpen} />
+          <DropdownMenuSeparator />
+          <CopyItem set={set} setIsOpen={setIsOpen} />
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 };
