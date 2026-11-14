@@ -9,7 +9,6 @@ const schema = z.string().min(1);
 export const deleteWorkoutNote = async (id: string) => {
   const validatedId = schema.safeParse(id);
   const user = await getCurrentUser();
-  await new Promise((res) => setTimeout(res, 2000))
   if (!user) {
     throw new Error("unauthorized");
   }
