@@ -2,6 +2,7 @@
 
 import { getCurrentUser } from "@/data/users";
 import prisma from "@/prisma/db";
+import { Feeling } from "@prisma/client";
 import { ActionResult } from "@/types";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -10,6 +11,7 @@ const updateWorkoutSchema = z.object({
   workoutId: z.string().min(1),
   description: z.string().optional(),
   note: z.string().optional(),
+  feeling: z.nativeEnum(Feeling).nullable().optional(),
 });
 
 export const updateWorkout = async (data: unknown): Promise<ActionResult> => {
@@ -30,7 +32,7 @@ export const updateWorkout = async (data: unknown): Promise<ActionResult> => {
     };
   }
 
-  const { workoutId, note } = validationResult.data;
+  const { workoutId, note, feeling } = validationResult.data;
 
   try {
     await prisma.workout.updateMany({
@@ -39,7 +41,8 @@ export const updateWorkout = async (data: unknown): Promise<ActionResult> => {
         userId: user.id,
       },
       data: {
-        note
+        note,
+        feeling,
       },
     });
   } catch {
@@ -49,7 +52,7 @@ export const updateWorkout = async (data: unknown): Promise<ActionResult> => {
     };
   }
 
-  revalidatePath(`app/workouts/${workoutId}`);
+  revalidatePath("/app/workouts", "layout");
 
   return {
     success: true,

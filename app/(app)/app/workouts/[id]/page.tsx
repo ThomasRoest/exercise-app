@@ -10,6 +10,7 @@ import { WorkoutSetForm } from "../components/WorkoutSetForm";
 import { WorkoutSetsList } from "../components/WorkoutSetsList";
 import { MessageSquareText } from "lucide-react";
 import { DeleteWorkoutNote } from "../components/DeleteWorkoutNote";
+import { FeelingPicker } from "../components/FeelingPicker";
 
 const WorkoutPage = async (props: { params: Promise<{ id: string }> }) => {
   const params = await props.params;
@@ -37,6 +38,7 @@ const WorkoutPage = async (props: { params: Promise<{ id: string }> }) => {
           <DeleteWorkout workout={workout} />
         </div>
       </PageHeader>
+      <FeelingPicker workoutId={workout.id} feeling={workout.feeling} />
       {workout.note && (
         <>
           <div className="mb-4 p-3 rounded-lg bg-gray-50 flex justify-between dark:bg-gray-800 dark:text-gray-400">

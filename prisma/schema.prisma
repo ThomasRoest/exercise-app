@@ -91,6 +91,7 @@ model Workout {
   id          String   @id @default(cuid())
   description String?
   note        String?
+  feeling     Feeling?
   createdAt   DateTime @default(now())
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -98,6 +99,12 @@ model Workout {
   sets Set[]
 
   @@map("workouts")
+}
+
+enum Feeling {
+  GOOD
+  OKAY
+  BAD
 }
 
 model Set {

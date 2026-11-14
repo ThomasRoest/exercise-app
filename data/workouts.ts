@@ -48,6 +48,7 @@ export const getUserWorkouts = async (opts: FilterOptions = {}) => {
       userId: true,
       createdAt: true,
       note: true,
+      feeling: true,
     },
   });
 };
