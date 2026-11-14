@@ -45,7 +45,7 @@ export const deleteProgram = async (
         id: validationResult.data.id
       },
     });
-  } catch (error) {
+  } catch {
     throw new Error("something went wrong")
   }
   revalidatePath("/app/notes");

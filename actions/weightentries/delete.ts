@@ -4,7 +4,6 @@ import { getCurrentUser } from "@/data/users";
 import prisma from "@/prisma/db";
 import { ActionResult } from "@/types";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const schema = z.object({
@@ -39,7 +38,7 @@ export const deleteWeightEntry = async (weightEntry: {
         id: weightEntry.id,
       },
     });
-  } catch (error) {
+  } catch {
     return {
       success: false,
       message: "Could not delete the habit",

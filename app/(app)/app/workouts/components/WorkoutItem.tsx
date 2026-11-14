@@ -1,4 +1,4 @@
-import { cn, formatDate } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import { Workout } from "@prisma/client";
 import { getYear } from "date-fns";
 import { MessageSquareText } from "lucide-react";

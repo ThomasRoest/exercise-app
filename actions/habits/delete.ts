@@ -38,7 +38,7 @@ export const deleteHabit = async (habit: {
         id: habit.id,
       },
     });
-  } catch (error) {
+  } catch {
     return {
       success: false,
       message: "Could not delete the habit",

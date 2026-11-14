@@ -42,7 +42,7 @@ export const updateWorkout = async (data: unknown): Promise<ActionResult> => {
         note
       },
     });
-  } catch (error) {
+  } catch {
     return {
       success: false,
       message: "something went wrong",

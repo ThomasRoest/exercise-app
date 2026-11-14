@@ -6,7 +6,7 @@ import { z } from "zod";
 
 const schema = z.string().min(1);
 
-export const deleteWorkoutNote = async (id: string, formData: FormData) => {
+export const deleteWorkoutNote = async (id: string) => {
   const validatedId = schema.safeParse(id);
   const user = await getCurrentUser();
   await new Promise((res) => setTimeout(res, 2000))

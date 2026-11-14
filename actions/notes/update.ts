@@ -43,7 +43,7 @@ export const updateNote = async (data: unknown): Promise<ActionResult> => {
         title,
       },
     });
-  } catch (error) {
+  } catch {
     return {
       success: false,
       message: "something went wrong"

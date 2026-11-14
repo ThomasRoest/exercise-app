@@ -44,7 +44,7 @@ export const createHabitEntry = async (
         },
       },
     });
-  } catch (error) {
+  } catch {
     return {
       success: false,
       message: "could not create habit entry",

@@ -41,7 +41,7 @@ export const deleteExercise = async (exercise: {
         id: exercise.id,
       },
     });
-  } catch (error) {
+  } catch {
     return {
       success: false,
       error: "Could not delete the exercise",

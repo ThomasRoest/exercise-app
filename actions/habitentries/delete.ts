@@ -36,7 +36,7 @@ export const deleteHabitEntry = async (data: Data): Promise<ActionResult> => {
         habitId: validationResult.data.habitId,
       },
     });
-  } catch (error) {
+  } catch {
     return {
       success: false,
       message: "Could not delete the entry",

@@ -43,7 +43,7 @@ export const createHabit = async (data: unknown): Promise<ActionResult> => {
         },
       },
     });
-  } catch (error) {
+  } catch {
     return {
       success: false,
       message: "could not create habit",

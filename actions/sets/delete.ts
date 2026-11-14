@@ -3,7 +3,7 @@
 import prisma from "@/prisma/db";
 import { getCurrentUser } from "@/data/users";
 import { Set } from "@prisma/client";
-import { revalidateTag, updateTag } from "next/cache";
+import { updateTag } from "next/cache";
 import { z } from "zod";
 
 const schema = z.object({
