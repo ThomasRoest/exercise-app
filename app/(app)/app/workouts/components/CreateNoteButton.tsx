@@ -7,7 +7,7 @@ import {
   DrawerTitle,
   DrawerTrigger
 } from "@/components/ui/drawer";
-import { PencilIcon } from "lucide-react";
+import { MessageSquarePlus, PencilIcon } from "lucide-react";
 import { useState } from "react";
 import { WorkoutNoteForm } from "./WorkoutNoteForm";
 
@@ -19,6 +19,7 @@ export const CreateNoteButton = ({
   note: string | null;
 }) => {
   const [open, setOpen] = useState(false);
+  const Icon = note ? PencilIcon : MessageSquarePlus;
 
   const onSuccess = () => {
     setOpen(false);
@@ -31,8 +32,9 @@ export const CreateNoteButton = ({
           variant="ghost"
           size="sm"
           className="active:bg-slate-300 text-gray-500"
+          aria-label={note ? "Edit note" : "Add note"}
         >
-          <PencilIcon className="w-4 h-4 mr-2 text-gray-500" />
+          <Icon className="w-4 h-4 text-gray-500" />
         </Button>
       </DrawerTrigger>
       <DrawerContent>
