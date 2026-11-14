@@ -12,7 +12,7 @@ export const MenuBarLink = ({
 }: {
   href: string;
   children: ReactNode;
-  icon: ReactElement<any>;
+  icon: ReactElement;
 }) => {
   const path = usePathname();
   return (

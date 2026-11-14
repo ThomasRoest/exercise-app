@@ -42,7 +42,7 @@ const NavLink = ({
 
 
 
-export const MainNav = (): ReactElement<any> => {
+export const MainNav = (): ReactElement => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
   const close = () => {

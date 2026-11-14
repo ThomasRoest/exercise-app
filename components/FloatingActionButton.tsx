@@ -29,7 +29,7 @@ export const FloatingActionButton = ({ children }: { children: ReactNode }) => {
         <DrawerDescription></DrawerDescription>
         <DrawerTitle />
         {Children.map(children, (child) => {
-          return cloneElement(child as ReactElement<any>, {
+          return cloneElement(child as ReactElement<{ onSuccess?: () => void }>, {
             onSuccess,
           });
         })}

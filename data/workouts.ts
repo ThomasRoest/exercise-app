@@ -26,7 +26,7 @@ export const getUserWorkouts = async (opts: FilterOptions = {}) => {
   }
 
   const validated = yearSchema.safeParse(opts.year);
-  let where: Prisma.WorkoutWhereInput = { userId: user.id };
+  const where: Prisma.WorkoutWhereInput = { userId: user.id };
   
   if (opts.year && validated.success) {
     where.createdAt = {
@@ -60,7 +60,7 @@ export const getWorkoutCount = async (opts: FilterOptions = {}) => {
   }
 
   const validated = yearSchema.safeParse(opts.year);
-  let where: Prisma.WorkoutWhereInput = { userId: user.id };
+  const where: Prisma.WorkoutWhereInput = { userId: user.id };
 
   if (opts.year && validated.success) {
     where.createdAt = {
